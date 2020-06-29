@@ -1,6 +1,8 @@
 package org.esy.ord.entity.view;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import org.esy.base.annotation.EntityInfo;
 import org.esy.base.annotation.FieldInfo;
 import org.esy.base.annotation.FilterInfo;
 import org.esy.base.core.BaseProperties;
+import org.esy.ord.entity.Contacr;
 import org.hibernate.annotations.Subselect;
 import org.hibernate.annotations.Synchronize;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @EntityInfo("合约表头档")
 @Table(name = "Contbahv")
-@Subselect("select a.*,b.cus_name from cont_bah a left join cus_cus b on b.cus_nbr=a.cus_nbr")
+@Subselect("select a.*,b.cus_alias from cont_bah a left join cus_cus b on b.cus_nbr=a.cus_nbr")
 @Synchronize("cont_bah")
 public class Contbahv extends BaseProperties {
 
@@ -216,13 +219,16 @@ public class Contbahv extends BaseProperties {
 
 	@FieldInfo("客戶名稱")
 	@FilterInfo(ListValue = "")
-	@Column(name = "cus_name", length = 64)
-	private String cus_name;
+	@Column(name = "cus_alias", length = 64)
+	private String cus_alias;
 
 	@Transient
 	@JsonProperty("group_nbrb")
 	private String group_nbrb;// shift+alt+s
-
+	
+	@Transient
+	@JsonProperty("contacrs")
+	private List<Contacr> contacrs = new ArrayList<Contacr>();
 	/**
 	 *
 	 * 构造函数
@@ -912,12 +918,12 @@ public class Contbahv extends BaseProperties {
 		this.close_name = Close_name;
 	}
 
-	public String getCus_name() {
-		return cus_name;
+	public String getCus_alias() {
+		return cus_alias;
 	}
 
-	public void setCus_name(String cus_name) {
-		this.cus_name = cus_name;
+	public void setCus_alias(String cus_alias) {
+		this.cus_alias = cus_alias;
 	}
 
 	public String getGroup_nbrb() {
@@ -927,5 +933,12 @@ public class Contbahv extends BaseProperties {
 	public void setGroup_nbrb(String group_nbrb) {
 		this.group_nbrb = group_nbrb;
 	}
+	
+	public List<Contacr> getContacrs() {
+		return contacrs;
+	}
 
+	public void setContacrs(List<Contacr> contacrs) {
+		this.contacrs = contacrs;
+	}
 }

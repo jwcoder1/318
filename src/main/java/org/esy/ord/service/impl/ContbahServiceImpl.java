@@ -38,10 +38,10 @@ public class ContbahServiceImpl implements IContbahService {
 	 */
 	@Override
 	@Transactional
-	public Contbah save(Contbah o) throws YesException {
+	public Contbahv save(Contbahv o) throws YesException {
 		if (BaseUtil.isNotEmpty(o.getUid())) {
 
-			Contbah old = dao.getByUid(Contbah.class, o.getUid());
+			Contbah old = dao.getByUid(Contbahv.class, o.getUid());
 			if (BaseUtil.isEmpty(old)) {
 				throw new YesException(HttpStatus.NOT_FOUND, "记录不存在，不可更新!!!");
 			}
@@ -71,7 +71,7 @@ public class ContbahServiceImpl implements IContbahService {
 			dao.save(contacr);
 		}
 
-		return o;
+		return dao.save(o);
 	}
 
 	/**

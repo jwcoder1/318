@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface IContbahService {
 
-	Contbah save(Contbah o);
+	Contbahv save(Contbahv o);
 
 	Contbah getByUid(String uid);
 

@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api/ord/contbah")
 public class ContbahController {
 
-    public static final String AUTHORITY = "ord_contract"; //與前端菜單編號一致
+    public static final String AUTHORITY = "ord_contbah"; //與前端菜單編號一致
 
 
 	@Autowired
@@ -55,7 +55,7 @@ public class ContbahController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<Response> save(@RequestBody Contbah o, HttpServletRequest request) {
+	public ResponseEntity<Response> save(@RequestBody Contbahv o, HttpServletRequest request) {
 
 		ResponseEntity<Response> result = RestUtils.checkAuthorization(request, loginService, AUTHORITY);
 		if (result.getBody().getError() != 0) {

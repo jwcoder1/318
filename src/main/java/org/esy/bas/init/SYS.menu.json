@@ -181,15 +181,15 @@
             "entity": {
                 "uid": "ord_contbah",
                 "pid": "ord",
-                "mid": "ord_contract",
+                "mid": "ord_contbah",
                 "order": 10101000,
                 "name": "合約管理",
-                "tag": "contract",
+                "tag": "contbah",
                 "enable": true,
                 "type": "menu",
                 "icon": "fa-book",
                 "tip": "合約管理",
-                "url": "#/ord/contract",
+                "url": "#/ord/contbah",
                 "memo": "合約管理",
                 "home": true,
                 "blank": false,
@@ -278,7 +278,7 @@
                 "uid": "acc_acc_cd",
                 "pid": "acc",
                 "mid": "acc_acccd",
-                "order": 10201000,
+                "order": 10200000,
                 "name": "分類建立",
                 "tag": "acccd",
                 "enable": true,
@@ -287,6 +287,78 @@
                 "tip": "分類建立",
                 "url": "#/acc/acccd",
                 "memo": "分類建立",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "科目建立",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "acc_accmst",
+                "pid": "acc",
+                "mid": "acc_accmst",
+                "order": 10201000,
+                "name": "科目建立",
+                "tag": "accmst",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "科目建立",
+                "url": "#/acc/accmst",
+                "memo": "科目建立",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "會計介面設定",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "acc_basfac",
+                "pid": "acc",
+                "mid": "acc_basfac",
+                "order": 10202000,
+                "name": "會計介面設定",
+                "tag": "basfac",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "會計介面設定",
+                "url": "#/acc/basfac",
+                "memo": "會計介面設定",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "收款單轉傳票",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "acc_accbat",
+                "pid": "acc",
+                "mid": "acc_accbat",
+                "order": 10203000,
+                "name": "收款單轉傳票",
+                "tag": "accbat",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "收款單轉傳票",
+                "url": "#/acc/accbat",
+                "memo": "收款單轉傳票",
                 "home": true,
                 "blank": false,
                 "expanded": false,
