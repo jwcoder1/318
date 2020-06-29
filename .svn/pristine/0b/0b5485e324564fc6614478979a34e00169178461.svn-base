@@ -1,0 +1,120 @@
+package org.esy.bas.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import org.esy.base.annotation.EntityInfo;
+import org.esy.base.annotation.FieldInfo;
+import org.esy.base.core.BaseProperties;
+import org.esy.base.annotation.FilterInfo;
+
+
+
+/**
+ *  ???
+ * 
+ * @author <a href="mailto:ardui@163.com"ardui</a
+ *  @date Thu Jun 18 14:03:16 CST 2020
+ */
+@Entity
+@Table(name = "cus_cus" ,indexes = { @Index(name = "created", columnList = "created"), 
+@Index(name = "updated", columnList = "updated")})
+@EntityInfo("cus_cus")
+public class Cuscus extends BaseProperties {
+
+	private static final long serialVersionUID = 1L;
+
+	@FieldInfo("cus_nbr")
+	@FilterInfo(ListValue = "")
+	@Column(name = "cus_nbr", length =32  )
+	private String cus_nbr ;
+
+	@FieldInfo("cus_name")
+	@FilterInfo(ListValue = "")
+	@Column(name = "cus_name", length =64  )
+	private String cus_name ;
+
+	@FieldInfo("cus_tel")
+	@FilterInfo(ListValue = "")
+	@Column(name = "cus_tel", length =32  )
+	private String cus_tel ;
+
+
+     /**
+	 *
+	 * ????
+	 *
+	 */
+	public Cuscus() {
+		super();
+	}
+	
+	/**
+	 *
+	 * ????
+	 *
+	 	 * @param cus_nbr
+	 *		  cus_nbr
+	 * 
+	 	 * @param cus_name
+	 *		  cus_name
+	 * 
+	 	 * @param cus_tel
+	 *		  cus_tel
+	 * 
+	 	 */
+    	public Cuscus( String cus_nbr, String cus_name, String cus_tel ) {
+		super();
+				this.cus_nbr = cus_nbr;
+				this.cus_name = cus_name;
+				this.cus_tel = cus_tel;
+			}
+
+		/**
+	 * @return cus_nbr
+	 *			cus_nbr
+	 */
+	public String getCus_nbr() {
+		return cus_nbr;
+	}
+
+	/**
+	 * @param cus_nbr
+	 *			cus_nbr
+	 */
+	public void setCus_nbr(String Cus_nbr) {
+		this.cus_nbr = Cus_nbr;
+	}
+		/**
+	 * @return cus_name
+	 *			cus_name
+	 */
+	public String getCus_name() {
+		return cus_name;
+	}
+
+	/**
+	 * @param cus_name
+	 *			cus_name
+	 */
+	public void setCus_name(String Cus_name) {
+		this.cus_name = Cus_name;
+	}
+		/**
+	 * @return cus_tel
+	 *			cus_tel
+	 */
+	public String getCus_tel() {
+		return cus_tel;
+	}
+
+	/**
+	 * @param cus_tel
+	 *			cus_tel
+	 */
+	public void setCus_tel(String Cus_tel) {
+		this.cus_tel = Cus_tel;
+	}
+	
+}

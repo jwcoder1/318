@@ -1,0 +1,754 @@
+{
+    "execute": [
+	    {
+            "summary": "所有菜单",
+            "hql": "delete Menu m "
+        }
+        
+    ],
+    "import": [
+         {
+            "summary": "基础信息",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bas",
+                "pid": "",
+                "mid": "bas",
+                "order": 10000000,
+                "name": "基础信息",
+                "tag": "bas",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "基础信息",
+                "url": "#",
+                "memo": "基础信息",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-info"
+            }
+
+        }
+        ,
+         {
+            "summary": "客户管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bas_cuscus",
+                "pid": "bas",
+                "mid": "bas_cuscus",
+                "order": 10001000,
+                "name": "客户管理",
+                "tag": "cuscus",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "客户管理",
+                "url": "#/bas/cuscus",
+                "memo": "客户管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-success"
+            }
+
+        }
+        ,
+         {
+            "summary": "組別項目維護",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bas_bsagroup",
+                "pid": "bas",
+                "mid": "bas_basgroup",
+                "order": 10002000,
+                "name": "組別項目維護",
+                "tag": "basgroup",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "組別項目維護",
+                "url": "#/bas/basgroup",
+                "memo": "組別項目維護",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-success"
+            }
+
+        }
+        ,
+         {
+            "summary": "代墊項目維護",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bas_bastemp",
+                "pid": "bas",
+                "mid": "bas_bastemp",
+                "order": 10003000,
+                "name": "代墊項目維護",
+                "tag": "bastemp",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "代墊項目維護",
+                "url": "#/bas/bastemp",
+                "memo": "代墊項目維護",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-success"
+            }
+
+        }
+        ,
+         {
+            "summary": "工作內容維護",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bas_salebat",
+                "pid": "bas",
+                "mid": "bas_salebat",
+                "order": 10004000,
+                "name": "工作內容維護",
+                "tag": "salebat",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "工作內容維護",
+                "url": "#/bas/salebat",
+                "memo": "工作內容維護",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-success"
+            }
+
+        }
+        ,
+         {
+            "summary": "員工資料維護",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bas_staff",
+                "pid": "bas",
+                "mid": "bas_staff",
+                "order": 10005000,
+                "name": "員工資料維護",
+                "tag": "staff",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "員工資料維護",
+                "url": "#/bas/staff",
+                "memo": "員工資料維護",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-success"
+            }
+
+        }
+        ,
+         {
+            "summary": "工作內容",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bas_workbat",
+                "pid": "bas",
+                "mid": "bas_workbat",
+                "order": 10006000,
+                "name": "工作內容",
+                "tag": "workbat",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "工作內容",
+                "url": "#/bas/workbat",
+                "memo": "工作內容",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-success"
+            }
+
+        }
+        ,
+         {
+            "summary": "業務管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "ord",
+                "pid": "",
+                "mid": "ord",
+                "order": 10100000,
+                "name": "業務管理",
+                "tag": "ord",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "業務管理",
+                "url": "#",
+                "memo": "業務管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-danger"
+            }
+
+        }
+        ,
+         {
+            "summary": "合約管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "ord_contbah",
+                "pid": "ord",
+                "mid": "ord_contract",
+                "order": 10101000,
+                "name": "合約管理",
+                "tag": "contract",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "合約管理",
+                "url": "#/ord/contract",
+                "memo": "合約管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-danger"
+            }
+
+        }
+        ,
+         {
+            "summary": "合約資料維護",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "ord_contacr",
+                "pid": "ord",
+                "mid": "ord_contract_data",
+                "order": 10102000,
+                "name": "合約資料維護",
+                "tag": "contract_data",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "合約資料維護",
+                "url": "#/ord/contract_data",
+                "memo": "合約資料維護",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-danger"
+            }
+
+        }
+        ,
+         {
+            "summary": "專案管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "ord_project",
+                "pid": "ord",
+                "mid": "ord_project",
+                "order": 10103000,
+                "name": "專案管理",
+                "tag": "project",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "專案管理",
+                "url": "#/ord/project",
+                "memo": "專案管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-danger"
+            }
+
+        }
+        ,
+         {
+            "summary": "專案資料維護",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "ord_project_data",
+                "pid": "ord",
+                "mid": "ord_project_data",
+                "order": 10104000,
+                "name": "專案資料維護",
+                "tag": "project_data",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "專案資料維護",
+                "url": "#/ord/project_data",
+                "memo": "專案資料維護",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-danger"
+            }
+
+        }
+        ,
+         {
+            "summary": "系统管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base",
+                "pid": "",
+                "mid": "base",
+                "order": 10200000,
+                "name": "系统管理",
+                "tag": "base",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-desktop",
+                "tip": "系统管理",
+                "url": "#",
+                "memo": "系统管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "账号管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_account",
+                "pid": "base",
+                "mid": "base_account",
+                "order": 10201000,
+                "name": "账号管理",
+                "tag": "base_account",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-user",
+                "tip": "账号管理",
+                "url": "#/base/account",
+                "memo": "账号管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-primary"
+            }
+
+        }
+        ,
+         {
+            "summary": "角色信息",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_role",
+                "pid": "base",
+                "mid": "base_role",
+                "order": 10202000,
+                "name": "角色信息",
+                "tag": "base_role",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-wrench",
+                "tip": "角色信息",
+                "url": "#/base/role",
+                "memo": "角色信息",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "角色账号",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_rolemember",
+                "pid": "base",
+                "mid": "base_rolemember",
+                "order": 10203000,
+                "name": "角色账号",
+                "tag": "base_rolemember",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-wrench",
+                "tip": "角色账号",
+                "url": "#/base/rolemember",
+                "memo": "角色账号",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "角色菜单",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_rolemenu",
+                "pid": "base",
+                "mid": "base_rolemenu",
+                "order": 10204000,
+                "name": "角色菜单",
+                "tag": "base_rolemenu",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-wrench",
+                "tip": "角色菜单",
+                "url": "#/base/rolemenu",
+                "memo": "角色菜单",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "菜单配置",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_config_menu",
+                "pid": "base",
+                "mid": "base_config_menu",
+                "order": 10205000,
+                "name": "菜单配置",
+                "tag": "base_config_menu",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-cogs",
+                "tip": "菜单配置",
+                "url": "#base/menu",
+                "memo": "菜单配置",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "企业管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_enterprise",
+                "pid": "base",
+                "mid": "base_enterprise",
+                "order": 10206000,
+                "name": "企业管理",
+                "tag": "base_enterprise",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-gavel",
+                "tip": "企业管理",
+                "url": "#/base/enterprise",
+                "memo": "企业管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "系统日志",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_log",
+                "pid": "base",
+                "mid": "base_log",
+                "order": 10207000,
+                "name": "系统日志",
+                "tag": "base_log",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-list",
+                "tip": "系统日志",
+                "url": "#/base/log",
+                "memo": "系统日志",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "数据字典",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_dictionary",
+                "pid": "base",
+                "mid": "base_dictionary",
+                "order": 10208000,
+                "name": "数据字典",
+                "tag": "base_dictionary",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "数据字典",
+                "url": "#/base/dictionary",
+                "memo": "数据字典",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "开发平台",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean",
+                "pid": "",
+                "mid": "bean",
+                "order": 10300000,
+                "name": "开发平台",
+                "tag": "bean",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-car",
+                "tip": "开发平台",
+                "url": "#",
+                "memo": "开发平台",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-primary"
+            }
+
+        }
+        ,
+         {
+            "summary": "开发者维户",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_annotation",
+                "pid": "bean",
+                "mid": "bean_annotation",
+                "order": 10301000,
+                "name": "开发者维户",
+                "tag": "bean_annotation",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "开发者维户",
+                "url": "#/bean/annotation",
+                "memo": "开发者维户",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "模块管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_tableBeans",
+                "pid": "bean",
+                "mid": "bean_tableBeans",
+                "order": 10302000,
+                "name": "模块管理",
+                "tag": "bean_tableBeans",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "模块管理",
+                "url": "#/bean/tableBeans",
+                "memo": "模块管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "菜单配置",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_menuconfigure",
+                "pid": "bean",
+                "mid": "bean_menuconfigure",
+                "order": 10303000,
+                "name": "菜单配置",
+                "tag": "bean_menuconfigure",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "菜单配置",
+                "url": "#/bean/menuconfigure",
+                "memo": "菜单配置",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "栏位类别维护",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_fieldtypes",
+                "pid": "bean",
+                "mid": "bean_fieldtypes",
+                "order": 10304000,
+                "name": "栏位类别维护",
+                "tag": "bean_fieldtypes",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "栏位类别维护",
+                "url": "#/bean/fieldtypes",
+                "memo": "栏位类别维护",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "表结构管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_tableInfos",
+                "pid": "bean",
+                "mid": "bean_tableInfos",
+                "order": 10305000,
+                "name": "表结构管理",
+                "tag": "bean_tableInfos",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "表结构管理",
+                "url": "#/bean/tableInfos",
+                "memo": "表结构管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "表单组件管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_discreteness",
+                "pid": "bean",
+                "mid": "bean_discreteness",
+                "order": 10306000,
+                "name": "表单组件管理",
+                "tag": "bean_discreteness",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "表单组件管理",
+                "url": "#/bean/discreteness",
+                "memo": "表单组件管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "查询组件管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_fdiscreteness",
+                "pid": "bean",
+                "mid": "bean_fdiscreteness",
+                "order": 10307000,
+                "name": "查询组件管理",
+                "tag": "bean_fdiscreteness",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "查询组件管理",
+                "url": "#/bean/fdiscreteness",
+                "memo": "查询组件管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "LOV类别管理",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_lovtype",
+                "pid": "bean",
+                "mid": "bean_lovtype",
+                "order": 10308000,
+                "name": "LOV类别管理",
+                "tag": "bean_lovtype",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "LOV类别管理",
+                "url": "#/bean/lovtype",
+                "memo": "LOV类别管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "功能配置",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_stencilconfigure",
+                "pid": "bean",
+                "mid": "bean_stencilconfigure",
+                "order": 10309000,
+                "name": "功能配置",
+                "tag": "bean_stencilconfigure",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "功能配置",
+                "url": "#/bean/stencilconfigure",
+                "memo": "功能配置",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+    ]
+}

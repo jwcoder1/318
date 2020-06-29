@@ -1,0 +1,24 @@
+package org.esy.ord.service;
+
+import org.esy.ord.entity.Contbah;
+import org.esy.base.dao.core.PageResult;
+import org.springframework.data.domain.Pageable;
+
+/**
+ * @author <a href="mailto:ardui@163.com">ardui</a>
+ * @date Fri Jun 19 16:32:44 CST 2020
+ *
+ * @version v2.0
+ */
+public interface IContbahService  {
+    
+    Contbah save(Contbah o);
+
+	Contbah getByUid(String uid);
+
+	boolean delete(Contbah o);
+
+	PageResult<Contbah> query(Contbah contbah, Pageable pageable);
+     
+     void deletes(String uids);
+}

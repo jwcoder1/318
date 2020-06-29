@@ -1,0 +1,254 @@
+{
+    "execute": [
+	    {
+            "summary": "??bean??",
+            "hql": "delete Menu m where m.mid = 'bean'"
+        },
+        {
+            "summary": "??bean?????",
+            "hql": "delete Menu m where m.mid like 'bean%'"
+        }
+        
+    ],
+    "import": [
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean",
+                "pid": "",
+                "mid": "bean",
+                "order": 10200000,
+                "name": "????",
+                "tag": "bean",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-car",
+                "tip": "????",
+                "url": "#",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-primary"
+            }
+
+        }
+        ,
+         {
+            "summary": "?????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_annotation",
+                "pid": "bean",
+                "mid": "bean_annotation",
+                "order": 10201000,
+                "name": "?????",
+                "tag": "bean_annotation",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "?????",
+                "url": "#/bean/annotation",
+                "memo": "?????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_tableBeans",
+                "pid": "bean",
+                "mid": "bean_tableBeans",
+                "order": 10202000,
+                "name": "????",
+                "tag": "bean_tableBeans",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "????",
+                "url": "#/bean/tableBeans",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_menuconfigure",
+                "pid": "bean",
+                "mid": "bean_menuconfigure",
+                "order": 10203000,
+                "name": "????",
+                "tag": "bean_menuconfigure",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "????",
+                "url": "#/bean/menuconfigure",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "??????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_fieldtypes",
+                "pid": "bean",
+                "mid": "bean_fieldtypes",
+                "order": 10204000,
+                "name": "??????",
+                "tag": "bean_fieldtypes",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "??????",
+                "url": "#/bean/fieldtypes",
+                "memo": "??????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "?????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_tableInfos",
+                "pid": "bean",
+                "mid": "bean_tableInfos",
+                "order": 10205000,
+                "name": "?????",
+                "tag": "bean_tableInfos",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "?????",
+                "url": "#/bean/tableInfos",
+                "memo": "?????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "??????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_discreteness",
+                "pid": "bean",
+                "mid": "bean_discreteness",
+                "order": 10206000,
+                "name": "??????",
+                "tag": "bean_discreteness",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "??????",
+                "url": "#/bean/discreteness",
+                "memo": "??????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "??????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_fdiscreteness",
+                "pid": "bean",
+                "mid": "bean_fdiscreteness",
+                "order": 10207000,
+                "name": "??????",
+                "tag": "bean_fdiscreteness",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "??????",
+                "url": "#/bean/fdiscreteness",
+                "memo": "??????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "LOV????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_lovtype",
+                "pid": "bean",
+                "mid": "bean_lovtype",
+                "order": 10208000,
+                "name": "LOV????",
+                "tag": "bean_lovtype",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "LOV????",
+                "url": "#/bean/lovtype",
+                "memo": "LOV????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_stencilconfigure",
+                "pid": "bean",
+                "mid": "bean_stencilconfigure",
+                "order": 10209000,
+                "name": "????",
+                "tag": "bean_stencilconfigure",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "????",
+                "url": "#/bean/stencilconfigure",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+    ]
+}

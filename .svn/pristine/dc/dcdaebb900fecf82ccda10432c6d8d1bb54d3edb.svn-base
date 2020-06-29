@@ -1,0 +1,514 @@
+{
+    "execute": [
+	    {
+            "summary": "????",
+            "hql": "delete Menu m "
+        }
+        
+    ],
+    "import": [
+         {
+            "summary": "cuscus",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bas_cuscus",
+                "pid": "bas",
+                "mid": "bas_cuscus",
+                "order": 0,
+                "name": "cuscus",
+                "tag": "cuscus",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "cuscus",
+                "url": "#/bas/cuscus",
+                "memo": "cuscus",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-success"
+            }
+
+        }
+        ,
+         {
+            "summary": "bas",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bas",
+                "pid": "",
+                "mid": "bas",
+                "order": 10000000,
+                "name": "bas",
+                "tag": "bas",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "bas",
+                "url": "#",
+                "memo": "bas",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-info"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base",
+                "pid": "",
+                "mid": "base",
+                "order": 10100000,
+                "name": "????",
+                "tag": "base",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-desktop",
+                "tip": "????",
+                "url": "#",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_account",
+                "pid": "base",
+                "mid": "base_account",
+                "order": 10101000,
+                "name": "????",
+                "tag": "base_account",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-user",
+                "tip": "????",
+                "url": "#/base/account",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-primary"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_role",
+                "pid": "base",
+                "mid": "base_role",
+                "order": 10102000,
+                "name": "????",
+                "tag": "base_role",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-wrench",
+                "tip": "????",
+                "url": "#/base/role",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_rolemember",
+                "pid": "base",
+                "mid": "base_rolemember",
+                "order": 10103000,
+                "name": "????",
+                "tag": "base_rolemember",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-wrench",
+                "tip": "????",
+                "url": "#/base/rolemember",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_rolemenu",
+                "pid": "base",
+                "mid": "base_rolemenu",
+                "order": 10104000,
+                "name": "????",
+                "tag": "base_rolemenu",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-wrench",
+                "tip": "????",
+                "url": "#/base/rolemenu",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_config_menu",
+                "pid": "base",
+                "mid": "base_config_menu",
+                "order": 10105000,
+                "name": "????",
+                "tag": "base_config_menu",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-cogs",
+                "tip": "????",
+                "url": "#base/menu",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_enterprise",
+                "pid": "base",
+                "mid": "base_enterprise",
+                "order": 10106000,
+                "name": "????",
+                "tag": "base_enterprise",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-gavel",
+                "tip": "????",
+                "url": "#/base/enterprise",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-pink"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_log",
+                "pid": "base",
+                "mid": "base_log",
+                "order": 10107000,
+                "name": "????",
+                "tag": "base_log",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-list",
+                "tip": "????",
+                "url": "#/base/log",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "base_dictionary",
+                "pid": "base",
+                "mid": "base_dictionary",
+                "order": 10108000,
+                "name": "????",
+                "tag": "base_dictionary",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "????",
+                "url": "#/base/dictionary",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean",
+                "pid": "",
+                "mid": "bean",
+                "order": 10200000,
+                "name": "????",
+                "tag": "bean",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-car",
+                "tip": "????",
+                "url": "#",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-primary"
+            }
+
+        }
+        ,
+         {
+            "summary": "?????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_annotation",
+                "pid": "bean",
+                "mid": "bean_annotation",
+                "order": 10201000,
+                "name": "?????",
+                "tag": "bean_annotation",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "?????",
+                "url": "#/bean/annotation",
+                "memo": "?????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_tableBeans",
+                "pid": "bean",
+                "mid": "bean_tableBeans",
+                "order": 10202000,
+                "name": "????",
+                "tag": "bean_tableBeans",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "????",
+                "url": "#/bean/tableBeans",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_menuconfigure",
+                "pid": "bean",
+                "mid": "bean_menuconfigure",
+                "order": 10203000,
+                "name": "????",
+                "tag": "bean_menuconfigure",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "????",
+                "url": "#/bean/menuconfigure",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "??????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_fieldtypes",
+                "pid": "bean",
+                "mid": "bean_fieldtypes",
+                "order": 10204000,
+                "name": "??????",
+                "tag": "bean_fieldtypes",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "??????",
+                "url": "#/bean/fieldtypes",
+                "memo": "??????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "?????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_tableInfos",
+                "pid": "bean",
+                "mid": "bean_tableInfos",
+                "order": 10205000,
+                "name": "?????",
+                "tag": "bean_tableInfos",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "?????",
+                "url": "#/bean/tableInfos",
+                "memo": "?????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "??????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_discreteness",
+                "pid": "bean",
+                "mid": "bean_discreteness",
+                "order": 10206000,
+                "name": "??????",
+                "tag": "bean_discreteness",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "??????",
+                "url": "#/bean/discreteness",
+                "memo": "??????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "??????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_fdiscreteness",
+                "pid": "bean",
+                "mid": "bean_fdiscreteness",
+                "order": 10207000,
+                "name": "??????",
+                "tag": "bean_fdiscreteness",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "??????",
+                "url": "#/bean/fdiscreteness",
+                "memo": "??????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "LOV????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_lovtype",
+                "pid": "bean",
+                "mid": "bean_lovtype",
+                "order": 10208000,
+                "name": "LOV????",
+                "tag": "bean_lovtype",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "LOV????",
+                "url": "#/bean/lovtype",
+                "memo": "LOV????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+        ,
+         {
+            "summary": "????",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "bean_stencilconfigure",
+                "pid": "bean",
+                "mid": "bean_stencilconfigure",
+                "order": 10209000,
+                "name": "????",
+                "tag": "bean_stencilconfigure",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-file",
+                "tip": "????",
+                "url": "#/bean/stencilconfigure",
+                "memo": "????",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-warning"
+            }
+
+        }
+    ]
+}

@@ -1,0 +1,117 @@
+package org.esy.bas.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
+
+import org.esy.base.annotation.EntityInfo;
+import org.esy.base.annotation.FieldInfo;
+import org.esy.base.annotation.FilterInfo;
+import org.esy.base.core.BaseProperties;
+
+/**
+ * 实体类
+ * 
+ * @author <a href="mailto:ardui@163.com"ardui</a
+ * @date Thu Jun 18 15:57:00 CST 2020
+ */
+@Entity
+@Table(name = "cus_cus", indexes = { @Index(name = "created", columnList = "created"),
+		@Index(name = "updated", columnList = "updated") })
+@EntityInfo("客户信息")
+public class Cuscus extends BaseProperties {
+
+	private static final long serialVersionUID = 1L;
+
+	@FieldInfo("客户代号")
+	@FilterInfo(ListValue = "eq")
+	@Column(name = "cus_nbr", length = 32)
+	private String cus_nbr;
+
+	@FieldInfo("客户名称")
+	@FilterInfo(ListValue = "match")
+	@Column(name = "cus_name", length = 100)
+	private String cus_name;
+
+	@FieldInfo("客户电话")
+	@FilterInfo(ListValue = "match")
+	@Column(name = "cus_tel", length = 32)
+	private String cus_tel;
+
+	/**
+	 *
+	 * 构造函数
+	 *
+	 */
+	public Cuscus() {
+		super();
+	}
+
+	/**
+	 *
+	 * 构造函数
+	 *
+	 * @param cus_nbr
+	 *            客户代号
+	 * 
+	 * @param cus_name
+	 *            客户名称
+	 * 
+	 * @param cus_tel
+	 *            客户电话
+	 * 
+	 */
+	public Cuscus(String cus_nbr, String cus_name, String cus_tel) {
+		super();
+		this.cus_nbr = cus_nbr;
+		this.cus_name = cus_name;
+		this.cus_tel = cus_tel;
+	}
+
+	/**
+	 * @return cus_nbr 客户代号
+	 */
+	public String getCus_nbr() {
+		return cus_nbr;
+	}
+
+	/**
+	 * @param cus_nbr
+	 *            客户代号
+	 */
+	public void setCus_nbr(String Cus_nbr) {
+		this.cus_nbr = Cus_nbr;
+	}
+
+	/**
+	 * @return cus_name 客户名称
+	 */
+	public String getCus_name() {
+		return cus_name;
+	}
+
+	/**
+	 * @param cus_name
+	 *            客户名称
+	 */
+	public void setCus_name(String Cus_name) {
+		this.cus_name = Cus_name;
+	}
+
+	/**
+	 * @return cus_tel 客户电话
+	 */
+	public String getCus_tel() {
+		return cus_tel;
+	}
+
+	/**
+	 * @param cus_tel
+	 *            客户电话
+	 */
+	public void setCus_tel(String Cus_tel) {
+		this.cus_tel = Cus_tel;
+	}
+
+}
