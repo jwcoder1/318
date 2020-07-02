@@ -1,8 +1,6 @@
 package org.esy.ord.entity.view;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +11,6 @@ import org.esy.base.annotation.EntityInfo;
 import org.esy.base.annotation.FieldInfo;
 import org.esy.base.annotation.FilterInfo;
 import org.esy.base.core.BaseProperties;
-import org.esy.ord.entity.Contacr;
 import org.hibernate.annotations.Subselect;
 import org.hibernate.annotations.Synchronize;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,12 +19,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@EntityInfo("合约表头档")
-@Table(name = "Contbahv")
-@Subselect("select a.*,b.cus_alias from cont_bah a left join cus_cus b on b.cus_nbr=a.cus_nbr")
+@EntityInfo("專案表頭")
+@Table(name = "Contcasev")
+@Subselect("select a.*,b.cus_alias c.s_name from cont_bah a "
+		+ "left join cus_cus b on b.cus_nbr=a.cus_nbr "
+		+ "left join staff c on c.s_nbr=a.inv_name"
+		+ "left join staff c on c.s_nbr=a.edit_user1"
+		+ "left join staff c on c.s_nbr=a.edit_user2")
 @Synchronize("cont_bah")
-public class Contbahv extends BaseProperties {
-
+public class Contcasev extends BaseProperties {
+//where a.proj_nbr<>''
 	private static final long serialVersionUID = 1L;
 
 	@FieldInfo("合約編號")
@@ -41,19 +42,20 @@ public class Contbahv extends BaseProperties {
 	private String con_nbr;
 
 	@FieldInfo("客戶編號")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="cus_nbr,cus_nbrb") 
+	@FilterInfo(ListValue = "")
 	@Column(name = "cus_nbr", length = 32)
 	private String cus_nbr;
 
-	@FieldInfo("合約日期")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="date,dateb") 
+
+	@FieldInfo("日期")
+	@FilterInfo(ListValue = "")
 	@Column(name = "date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date date;
 	
 	@FieldInfo("預計完成日期")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="plan_date,plan_dateb") 
+	@FilterInfo(ListValue = "")
 	@Column(name = "plan_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -63,6 +65,7 @@ public class Contbahv extends BaseProperties {
 	@FilterInfo(ListValue = "gte,lte", FieldsValue = "group_nbr,group_nbrb")
 	@Column(name = "group_nbr", length = 32)
 	private String group_nbr;
+	
 
 	@FieldInfo("合約年度")
 	@FilterInfo(ListValue = "")
@@ -70,7 +73,7 @@ public class Contbahv extends BaseProperties {
 	private String cont_year;
 
 	@FieldInfo("年度型合約")
-	@FilterInfo(ListValue = "")
+	@FilterInfo(ListValue = "eq")
 	@Column(name = "year_status")
 	private boolean year_status;
 
@@ -115,16 +118,15 @@ public class Contbahv extends BaseProperties {
 	private String statuts1;
 
 	@FieldInfo("委任日期")
-	@FilterInfo(ListValue = "")
+	@FilterInfo(ListValue="gte,lte",FieldsValue="inv_date,inv_dateb") 
 	@Column(name = "inv_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date inv_date;
+	
 
-	@FieldInfo("專案編號")
-	@FilterInfo(ListValue = "")
-	@Column(name = "proj_nbr", length = 32)
-	private String proj_nbr;
+
+
 
 	@FieldInfo("接案人員")
 	@FilterInfo(ListValue = "")
@@ -181,7 +183,7 @@ public class Contbahv extends BaseProperties {
 	private String appo_letter;
 
 	@FieldInfo("核准否")
-	@FilterInfo(ListValue = "")
+	@FilterInfo(ListValue = "eq")
 	@Column(name = "proj_status")
 	private boolean proj_status;
 
@@ -196,14 +198,14 @@ public class Contbahv extends BaseProperties {
 	private String status_name;
 
 	@FieldInfo("結案日期")
-	@FilterInfo(ListValue = "")
+	@FilterInfo(ListValue="gte,lte",FieldsValue="close_date,close_dateb") 
 	@Column(name = "close_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date close_date;
 
 	@FieldInfo("結案否")
-	@FilterInfo(ListValue = "")
+	@FilterInfo(ListValue = "eq")
 	@Column(name = "close_flag")
 	private boolean close_flag;
 
@@ -226,60 +228,87 @@ public class Contbahv extends BaseProperties {
 	@JsonProperty("group_nbrb")
 	private String group_nbrb;// shift+alt+s
 	
-	@FieldInfo("合約日期") 
+	@FieldInfo("委任日期") 
 	@Transient 
-	@JsonProperty("dateb") 
+	@JsonProperty("inv_dateb") 
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date dateb;
+	private Date inv_dateb;
 	
-	@FieldInfo("預計完成日期") 
+	@FieldInfo("結案日期") 
 	@Transient 
-	@JsonProperty("plan_dateb") 
+	@JsonProperty("close_dateb") 
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date plan_dateb;
+	private Date close_dateb;
+
+	private String proj_nbr;
 	
-	@Transient
-	@JsonProperty("cus_nbrb")
-	private String cus_nbrb;// shift+alt+s
+	@FieldInfo("員工姓名")
+	@FilterInfo(ListValue = "match")
+	@Column(name = "s_name", length =32  )
+	private String s_name ;
 	
-	public Date getDateb() {
-		return dateb;
+	@FieldInfo("員工姓名")
+	@FilterInfo(ListValue = "match")
+	@Column(name = "s_name1", length =32  )
+	private String s_name1 ;
+	
+	public String getS_name() {
+		return s_name;
 	}
 
-	public void setDateb(Date dateb) {
-		this.dateb = dateb;
+	public void setS_name(String s_name) {
+		this.s_name = s_name;
 	}
 
-	public Date getPlan_dateb() {
-		return plan_dateb;
+	public String getS_name1() {
+		return s_name1;
 	}
 
-	public void setPlan_dateb(Date plan_dateb) {
-		this.plan_dateb = plan_dateb;
+	public void setS_name1(String s_name1) {
+		this.s_name1 = s_name1;
 	}
 
-	public String getCus_nbrb() {
-		return cus_nbrb;
+	public String getS_name2() {
+		return s_name2;
 	}
 
-	public void setCus_nbrb(String cus_nbrb) {
-		this.cus_nbrb = cus_nbrb;
+	public void setS_name2(String s_name2) {
+		this.s_name2 = s_name2;
 	}
 
-	@Transient
-	@JsonProperty("contacrs")
-	private List<Contacr> contacrs = new ArrayList<Contacr>();
+	@FieldInfo("員工姓名")
+	@FilterInfo(ListValue = "match")
+	@Column(name = "s_name2", length =32  )
+	private String s_name2 ;
+	
+	
+	public Date getClose_dateb() {
+		return close_dateb;
+	}
+
+	public void setClose_dateb(Date close_dateb) {
+		this.close_dateb = close_dateb;
+	}
+
+	public Date getInv_dateb() {
+		return inv_dateb;
+	}
+
+	public void setInv_dateb(Date inv_dateb) {
+		this.inv_dateb = inv_dateb;
+	}
+
 	/**
 	 *
 	 * 构造函数
 	 *
 	 */
-	public Contbahv() {
+	public Contcasev() {
 		super();
 	}
-	
+
 	/**
 	 *
 	 * 构造函数
@@ -390,7 +419,7 @@ public class Contbahv extends BaseProperties {
 	 *            結案人員姓名
 	 * 
 	 */
-	public Contbahv(String nbr, String con_nbr, String cus_nbr, Date date, Date plan_date, String group_nbr,
+	public Contcasev(String nbr, String con_nbr, String cus_nbr, Date date, Date plan_date, String group_nbr,
 			String cont_year, boolean year_status, Double amt, String items_desc, String s_nbr, String work_desc,
 			Double tot_amt, String emp_nbr, String status, String statuts1, Date inv_date, String proj_nbr,
 			String inv_user, String inv_name, String edit_user1, String edit_user2, String edit_name1,
@@ -976,24 +1005,6 @@ public class Contbahv extends BaseProperties {
 		this.group_nbrb = group_nbrb;
 	}
 	
-	public List<Contacr> getContacrs() {
-		return contacrs;
-	}
+	
 
-	public void setContacrs(List<Contacr> contacrs) {
-		this.contacrs = contacrs;
-	}
-//	/**
-//	 * @return the nbrdate
-//	 */
-//	public Date getNbrdate() {
-//		return nbrdate;
-//	}
-//
-//	/**
-//	 * @param nbrdateb the nbrdateb to set
-//	 */
-//	public void setNbrdate(Date nbrdate) {
-//		this.nbrdate = nbrdate;
-//	}
 }

@@ -1,4 +1,4 @@
-package org.esy.ord.entity.view;
+package org.esy.ord.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -13,20 +14,22 @@ import org.esy.base.annotation.EntityInfo;
 import org.esy.base.annotation.FieldInfo;
 import org.esy.base.annotation.FilterInfo;
 import org.esy.base.core.BaseProperties;
-import org.esy.ord.entity.Contacr;
-import org.hibernate.annotations.Subselect;
-import org.hibernate.annotations.Synchronize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 实体类
+ * 
+ * @author <a href="mailto:ardui@163.com"ardui</a
+ * @date Tue Jun 23 11:06:06 CST 2020
+ */
 @Entity
-@EntityInfo("合约表头档")
-@Table(name = "Contbahv")
-@Subselect("select a.*,b.cus_alias from cont_bah a left join cus_cus b on b.cus_nbr=a.cus_nbr")
-@Synchronize("cont_bah")
-public class Contbahv extends BaseProperties {
+@Table(name = "cont_bah", indexes = { @Index(name = "created", columnList = "created"),
+		@Index(name = "updated", columnList = "updated") })
+@EntityInfo("合約表頭檔")
+public class Contbah extends BaseProperties {
 
 	private static final long serialVersionUID = 1L;
 
@@ -41,26 +44,26 @@ public class Contbahv extends BaseProperties {
 	private String con_nbr;
 
 	@FieldInfo("客戶編號")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="cus_nbr,cus_nbrb") 
+	@FilterInfo(ListValue = "")
 	@Column(name = "cus_nbr", length = 32)
 	private String cus_nbr;
 
-	@FieldInfo("合約日期")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="date,dateb") 
+	@FieldInfo("日期")
+	@FilterInfo(ListValue = "")
 	@Column(name = "date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date date;
-	
+
 	@FieldInfo("預計完成日期")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="plan_date,plan_dateb") 
+	@FilterInfo(ListValue = "")
 	@Column(name = "plan_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date plan_date;
 
 	@FieldInfo("組別")
-	@FilterInfo(ListValue = "gte,lte", FieldsValue = "group_nbr,group_nbrb")
+	@FilterInfo(ListValue = "")
 	@Column(name = "group_nbr", length = 32)
 	private String group_nbr;
 
@@ -217,69 +220,12 @@ public class Contbahv extends BaseProperties {
 	@Column(name = "close_name", length = 32)
 	private String close_name;
 
-	@FieldInfo("客戶名稱")
-	@FilterInfo(ListValue = "match")
-	@Column(name = "cus_alias", length = 64)
-	private String cus_alias;
 
-	@Transient
-	@JsonProperty("group_nbrb")
-	private String group_nbrb;// shift+alt+s
-	
-	@FieldInfo("合約日期") 
-	@Transient 
-	@JsonProperty("dateb") 
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date dateb;
-	
-	@FieldInfo("預計完成日期") 
-	@Transient 
-	@JsonProperty("plan_dateb") 
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date plan_dateb;
-	
-	@Transient
-	@JsonProperty("cus_nbrb")
-	private String cus_nbrb;// shift+alt+s
-	
-	public Date getDateb() {
-		return dateb;
-	}
 
-	public void setDateb(Date dateb) {
-		this.dateb = dateb;
-	}
-
-	public Date getPlan_dateb() {
-		return plan_dateb;
-	}
-
-	public void setPlan_dateb(Date plan_dateb) {
-		this.plan_dateb = plan_dateb;
-	}
-
-	public String getCus_nbrb() {
-		return cus_nbrb;
-	}
-
-	public void setCus_nbrb(String cus_nbrb) {
-		this.cus_nbrb = cus_nbrb;
-	}
-
-	@Transient
-	@JsonProperty("contacrs")
-	private List<Contacr> contacrs = new ArrayList<Contacr>();
-	/**
-	 *
-	 * 构造函数
-	 *
-	 */
-	public Contbahv() {
+	public Contbah() {
 		super();
 	}
-	
+
 	/**
 	 *
 	 * 构造函数
@@ -390,7 +336,7 @@ public class Contbahv extends BaseProperties {
 	 *            結案人員姓名
 	 * 
 	 */
-	public Contbahv(String nbr, String con_nbr, String cus_nbr, Date date, Date plan_date, String group_nbr,
+	public Contbah(String nbr, String con_nbr, String cus_nbr, Date date, Date plan_date, String group_nbr,
 			String cont_year, boolean year_status, Double amt, String items_desc, String s_nbr, String work_desc,
 			Double tot_amt, String emp_nbr, String status, String statuts1, Date inv_date, String proj_nbr,
 			String inv_user, String inv_name, String edit_user1, String edit_user2, String edit_name1,
@@ -960,40 +906,5 @@ public class Contbahv extends BaseProperties {
 		this.close_name = Close_name;
 	}
 
-	public String getCus_alias() {
-		return cus_alias;
-	}
-
-	public void setCus_alias(String cus_alias) {
-		this.cus_alias = cus_alias;
-	}
-
-	public String getGroup_nbrb() {
-		return group_nbrb;
-	}
-
-	public void setGroup_nbrb(String group_nbrb) {
-		this.group_nbrb = group_nbrb;
-	}
 	
-	public List<Contacr> getContacrs() {
-		return contacrs;
-	}
-
-	public void setContacrs(List<Contacr> contacrs) {
-		this.contacrs = contacrs;
-	}
-//	/**
-//	 * @return the nbrdate
-//	 */
-//	public Date getNbrdate() {
-//		return nbrdate;
-//	}
-//
-//	/**
-//	 * @param nbrdateb the nbrdateb to set
-//	 */
-//	public void setNbrdate(Date nbrdate) {
-//		this.nbrdate = nbrdate;
-//	}
 }

@@ -12,14 +12,14 @@ import org.springframework.data.domain.Pageable;
  *
  * @version v2.0
  */
-public interface IContbahService {
+public interface IContcaseService {
 
 	Contbahv save(Contbahv o);
 	Contbahv getByUid(String uid);
 
 	boolean delete(Contbahv o);
 
-	PageResult<Contbahv> query(Contbahv contbah, Pageable pageable);
+	PageResult<Contcasev> query(Contcasev contbah, Pageable pageable);
 	
 	void deletes(String uids);
 }

@@ -9,7 +9,8 @@ import org.esy.base.service.ILoginService;
 import org.esy.base.util.RestUtils;
 import org.esy.base.util.YesException;
 import org.esy.ord.entity.view.Contbahv;//**
-import org.esy.ord.service.IContbahService;
+import org.esy.ord.entity.view.Contcasev;
+import org.esy.ord.service.IContcaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -29,17 +30,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date Tue Jun 23 11:06:06 CST 2020
  */
 @Controller
-@RequestMapping("/api/ord/contbah")
-public class ContbahController {
+@RequestMapping("/api/ord/contcase")
+public class ContcaseController {
 
-    public static final String AUTHORITY = "ord_contbah"; //與前端菜單編號一致
+    public static final String AUTHORITY = "ord_project"; //與前端菜單編號一致
 
 
 	@Autowired
 	private ILoginService loginService;
 
 	@Autowired
-	private IContbahService contbahService;
+	private IContcaseService contcaseService;
 
 	/**
 	 * 通过页面数据保存实体
@@ -64,7 +65,7 @@ public class ContbahController {
 		Response resp;
 		try {
 			// o.setUid(null);
-			resp = new Response(0, "Save success.", contbahService.save(o));
+			resp = new Response(0, "Save success.", contcaseService.save(o));
 			return new ResponseEntity<Response>(resp, HttpStatus.OK);
 		} catch (YesException e) {
 			// TODO: handle exception
@@ -94,7 +95,7 @@ public class ContbahController {
 		Response resp;
 		try {
 
-			contbahService.deletes(uids);
+			contcaseService.deletes(uids);
 			resp = new Response(0, "Delete success.", null);
 			return new ResponseEntity<Response>(resp, HttpStatus.OK);
 		} catch (YesException e) {
@@ -123,7 +124,7 @@ public class ContbahController {
 
 		Response resp;
 
-		Contbahv o = contbahService.getByUid(uid);
+		Contbahv o = contcaseService.getByUid(uid);
 		if (o == null) {
 			resp = new Response(HttpStatus.NOT_FOUND.value(), "Object not found", null);
 			return new ResponseEntity<Response>(resp, HttpStatus.NOT_FOUND);
@@ -143,11 +144,11 @@ public class ContbahController {
 	 * @date Tue Jun 23 11:06:06 CST 2020
 	 */
 	@RequestMapping(value = "query", method = RequestMethod.POST)
-	public HttpResult query(@Valid @RequestBody(required = false) Contbahv contbah, Pageable pageable) {
+	public HttpResult query(@Valid @RequestBody(required = false) Contcasev contbah, Pageable pageable) {
 		if (contbah == null) {
-			contbah = new Contbahv();
+			contbah = new Contcasev();
 		}
-		return new HttpResult(contbahService.query(contbah, pageable));
+		return new HttpResult(contcaseService.query(contbah, pageable));
 	}
 
 }

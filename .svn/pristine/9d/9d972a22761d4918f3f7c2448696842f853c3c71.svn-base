@@ -15,6 +15,7 @@ import org.esy.base.util.YesException;
 import org.esy.ord.entity.Contacr;
 import org.esy.ord.entity.Contbah;
 import org.esy.ord.entity.view.Contbahv;  //**
+import org.esy.ord.entity.view.Contcasev; //***
 import org.esy.ord.service.IContbahService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -54,10 +55,13 @@ public class ContbahServiceImpl implements IContbahService {
 				throw new YesException(HttpStatus.INTERNAL_SERVER_ERROR, "该记录已被其他用户修改，不可更新!!！");
 			}
 		}
+//		else {
 //			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM");
+//
 //			String date = "S" + YESUtil.getDateString(o.getNbrdate(), formatter);
 //			String no = serialService.getSerialString("ord", "ordbah", date, 5, 99999);
 //			o.setNbr(no);
+//		}
 		
 		if (BaseUtil.isEmpty(o.getNbr())) {  //判斷欄位是否為空(o.get..()可變換，這邊用Nbr())
 			throw new YesException(HttpStatus.NOT_FOUND, "合约编号不可为空!!!");

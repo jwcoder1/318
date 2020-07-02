@@ -1,7 +1,7 @@
 package org.esy.ord.service;
 
 import org.esy.base.dao.core.PageResult;
-import org.esy.ord.entity.Contbah;
+import org.esy.base.util.YesException;
 import org.esy.ord.entity.view.Contbahv;//**
 import org.esy.ord.entity.view.Contcasev;//**
 import org.springframework.data.domain.Pageable;
@@ -12,14 +12,22 @@ import org.springframework.data.domain.Pageable;
  *
  * @version v2.0
  */
-public interface IContbahService {
+public interface IContcaseService {
 
 	Contbahv save(Contbahv o);
 	Contbahv getByUid(String uid);
 
 	boolean delete(Contbahv o);
 
-	PageResult<Contbahv> query(Contbahv contbah, Pageable pageable);
+	PageResult<Contcasev> query(Contcasev contbah, Pageable pageable);
 	
 	void deletes(String uids);
+	/**
+	 * 删除实体
+	 * 
+	 * @param Contbahv
+	 *            o
+	 * @return boolean @ version v2.0
+	 */
+	boolean delete(Contcasev o) throws YesException;
 }

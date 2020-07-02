@@ -1,14 +1,11 @@
 package org.esy.ord.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.esy.base.annotation.EntityInfo;
 import org.esy.base.annotation.FieldInfo;
@@ -17,7 +14,6 @@ import org.esy.base.core.BaseProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 实体类
@@ -220,9 +216,6 @@ public class Contbah extends BaseProperties {
 	@Column(name = "close_name", length = 32)
 	private String close_name;
 
-	@Transient
-	@JsonProperty("contacrs")
-	private List<Contacr> contacrs = new ArrayList<Contacr>();
 
 
 	public Contbah() {
@@ -909,12 +902,5 @@ public class Contbah extends BaseProperties {
 		this.close_name = Close_name;
 	}
 
-	public List<Contacr> getContacrs() {
-		return contacrs;
-	}
-
-	public void setContacrs(List<Contacr> contacrs) {
-		this.contacrs = contacrs;
-	}
-
+	
 }
