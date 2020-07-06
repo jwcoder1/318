@@ -45,7 +45,7 @@ public class ContbahController {
 	 * 通过页面数据保存实体
 	 * 
 	 * @author <a href="mailto:ardui@163.com">ardui</a>
-	 * @param Contbahv
+	 * @param acrbatv
 	 *            o
 	 * @param BindingResult
 	 *            request

@@ -8,102 +8,6 @@
     ],
     "import": [
          {
-            "summary": "收款單登入",
-            "classname": "org.esy.base.entity.Menu",
-            "entity": {
-                "uid": "acr_acrbah",
-                "pid": "acr",
-                "mid": "acr_acrbah",
-                "order": 0,
-                "name": "收款單登入",
-                "tag": "acrbah",
-                "enable": true,
-                "type": "menu",
-                "icon": "fa-book",
-                "tip": "收款單登入",
-                "url": "#/acr/acrbah",
-                "memo": "收款單登入",
-                "home": true,
-                "blank": false,
-                "expanded": false,
-                "color": "btn-primary"
-            }
-
-        }
-        ,
-         {
-            "summary": "客戶帳單列印",
-            "classname": "org.esy.base.entity.Menu",
-            "entity": {
-                "uid": "acr_aprnbah",
-                "pid": "acr",
-                "mid": "acr_aprnbah",
-                "order": 0,
-                "name": "客戶帳單列印",
-                "tag": "aprnbah",
-                "enable": true,
-                "type": "menu",
-                "icon": "fa-book",
-                "tip": "客戶帳單列印",
-                "url": "#/acr/aprnbah",
-                "memo": "客戶帳單列印",
-                "home": true,
-                "blank": false,
-                "expanded": false,
-                "color": "btn-primary"
-            }
-
-        }
-        ,
-         {
-            "summary": "代墊款登入",
-            "classname": "org.esy.base.entity.Menu",
-            "entity": {
-                "uid": "acr_tempbat",
-                "pid": "acr",
-                "mid": "acr_tempbat",
-                "order": 0,
-                "name": "代墊款登入",
-                "tag": "tempbat",
-                "enable": true,
-                "type": "menu",
-                "icon": "fa-book",
-                "tip": "代墊款登入",
-                "url": "#/acr/tempbat",
-                "memo": "代墊款登入",
-                "home": true,
-                "blank": false,
-                "expanded": false,
-                "color": "btn-primary"
-            }
-
-        }
-        ,
-         {
-            "summary": "應收帳款查詢",
-            "classname": "org.esy.base.entity.Menu",
-            "entity": {
-                "uid": "acr_accounts",
-                "pid": "acr",
-                "mid": "acr_accounts",
-                "order": 0,
-                "name": "應收帳款查詢",
-                "tag": "accounts",
-                "enable": true,
-                "type": "menu",
-                "icon": "fa-book",
-                "tip": "應收帳款查詢",
-                "url": "#/acr/accounts",
-                "memo": "應收帳款查詢",
-                "home": true,
-                "blank": false,
-                "expanded": false,
-                "color": "btn-primary"
-            }
-
-        }
-        ,
-         {
             "summary": "基礎訊息",
             "classname": "org.esy.base.entity.Menu",
             "entity": {
@@ -301,15 +205,15 @@
             "entity": {
                 "uid": "ord_project",
                 "pid": "ord",
-                "mid": "ord_project",
+                "mid": "ord_contcase",
                 "order": 10102000,
                 "name": "專案管理",
-                "tag": "project",
+                "tag": "contcase",
                 "enable": true,
                 "type": "menu",
                 "icon": "fa-book",
                 "tip": "專案管理",
-                "url": "#/ord/project",
+                "url": "#/ord/contcase",
                 "memo": "專案管理",
                 "home": true,
                 "blank": false,
@@ -325,15 +229,15 @@
             "entity": {
                 "uid": "ord_project_data",
                 "pid": "ord",
-                "mid": "ord_annual_contract",
+                "mid": "ord_contyear",
                 "order": 10103000,
                 "name": "合約年度結轉",
-                "tag": "annual_contract",
+                "tag": "contyear",
                 "enable": true,
                 "type": "menu",
                 "icon": "fa-book",
                 "tip": "合約年度結轉",
-                "url": "#/ord/annual_contract",
+                "url": "#/ord/contyear",
                 "memo": "合約年度結轉",
                 "home": true,
                 "blank": false,
@@ -359,6 +263,102 @@
                 "tip": "帳款管理",
                 "url": "#",
                 "memo": "帳款管理",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-primary"
+            }
+
+        }
+        ,
+         {
+            "summary": "代墊款登入",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "acr_tempbat",
+                "pid": "acr",
+                "mid": "acr_tempbat",
+                "order": 10200000,
+                "name": "代墊款登入",
+                "tag": "tempbat",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "代墊款登入",
+                "url": "#/acr/tempbat",
+                "memo": "代墊款登入",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-primary"
+            }
+
+        }
+        ,
+         {
+            "summary": "客戶帳單列印",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "acr_aprnbah",
+                "pid": "acr",
+                "mid": "acr_aprnbah",
+                "order": 10201000,
+                "name": "客戶帳單列印",
+                "tag": "aprnbah",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "客戶帳單列印",
+                "url": "#/acr/aprnbah",
+                "memo": "客戶帳單列印",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-primary"
+            }
+
+        }
+        ,
+         {
+            "summary": "應收帳款查詢",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "acr_accounts",
+                "pid": "acr",
+                "mid": "acr_accounts",
+                "order": 10202000,
+                "name": "應收帳款查詢",
+                "tag": "accounts",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "應收帳款查詢",
+                "url": "#/acr/accounts",
+                "memo": "應收帳款查詢",
+                "home": true,
+                "blank": false,
+                "expanded": false,
+                "color": "btn-primary"
+            }
+
+        }
+        ,
+         {
+            "summary": "收款單登入",
+            "classname": "org.esy.base.entity.Menu",
+            "entity": {
+                "uid": "acr_acrbah",
+                "pid": "acr",
+                "mid": "acr_acrbah",
+                "order": 10203000,
+                "name": "收款單登入",
+                "tag": "acrbah",
+                "enable": true,
+                "type": "menu",
+                "icon": "fa-book",
+                "tip": "收款單登入",
+                "url": "#/acr/acrbah",
+                "memo": "收款單登入",
                 "home": true,
                 "blank": false,
                 "expanded": false,

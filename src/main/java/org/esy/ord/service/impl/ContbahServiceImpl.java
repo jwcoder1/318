@@ -37,7 +37,7 @@ public class ContbahServiceImpl implements IContbahService {
 	/**
 	 * 保存实体
 	 * 
-	 * @param Contbahv
+	 * @param acrbatv
 	 * @return Contbah o
 	 * @version v2.0
 	 */
@@ -117,7 +117,7 @@ public class ContbahServiceImpl implements IContbahService {
 	/**
 	 * 删除实体
 	 * 
-	 * @param Contbahv
+	 * @param acrbatv
 	 *            o
 	 * @return boolean @ version v2.0
 	 */

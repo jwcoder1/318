@@ -21,7 +21,7 @@ public class AcrbatServiceImpl implements IAcrbatService {
 	
 	/**
 	 * 保存实体
-	 * @param Acrbat
+	 * @param acrbatv
 	 * @return Acrbat o
 	 * @version v2.0
 	 */
@@ -55,7 +55,7 @@ public class AcrbatServiceImpl implements IAcrbatService {
 
 	/**
 	 * 删除实体
-	 * @param Acrbat o
+	 * @param acrbatv o
 	 * @return boolean 
 	 * @ version v2.0 
 	 */

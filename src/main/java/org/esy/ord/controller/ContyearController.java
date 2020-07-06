@@ -1,12 +1,17 @@
-package org.esy.acr.controller;
-
-import java.util.Map;
+package org.esy.ord.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import org.springframework.data.domain.Pageable;
+
+import org.esy.base.core.Response;
+import org.esy.base.http.HttpResult;
+import org.esy.base.service.ILoginService;
+import org.esy.base.util.RestUtils;
+import org.esy.base.util.YesException;
+import org.esy.ord.entity.view.Contyearv;
+import org.esy.ord.service.IContyearService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,56 +19,52 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.esy.base.util.YesException;
-import org.esy.base.core.Response;
-import org.esy.base.service.ILoginService;
-import org.esy.base.util.RestUtils;
-import org.esy.base.http.HttpResult;
-import org.esy.acr.service.IAcrbatService;
-import org.esy.acr.entity.Acrbat;
 
 /**
  * 实体控制器
- *  @author <a href="mailto:ardui@163.com">ardui</a>
- *  @version v2.0
- * @date Sat Jun 20 09:44:17 CST 2020			
+ * 
+ * @author <a href="mailto:ardui@163.com">ardui</a>
+ * @version v2.0
+ * @date Tue Jun 23 11:06:06 CST 2020
  */
 @Controller
-@RequestMapping("/api/acr/acrbat")
-public class AcrbatController {
+@RequestMapping("/api/ord/contyear")
+public class ContyearController {
 
-    public static final String AUTHORITY = "acr_acrbat";
+    public static final String AUTHORITY = "ord_contyear"; //與前端菜單編號一致
+
 
 	@Autowired
 	private ILoginService loginService;
 
 	@Autowired
-	private IAcrbatService acrbatService;
-		
+	private IContyearService contyearService;
+
 	/**
 	 * 通过页面数据保存实体
 	 * 
-	 * @author <a href="mailto:ardui@163.com">ardui</a> 
-	 * @param acrbatv  o
-	 * @param BindingResult request
+	 * @author <a href="mailto:ardui@163.com">ardui</a>
+	 * @param acrbatv
+	 *            o
+	 * @param BindingResult
+	 *            request
 	 * @return ResponseEntity<Response>
-	 * @date Sat Jun 20 09:44:17 CST 2020	
+	 * @date Tue Jun 23 11:06:06 CST 2020
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<Response> save(@RequestBody Acrbat o, HttpServletRequest request) {
+	public ResponseEntity<Response> save(@RequestBody Contyearv o, HttpServletRequest request) {
 
-		ResponseEntity<Response> result = RestUtils.checkAuthorization(request, loginService,AUTHORITY);
+		ResponseEntity<Response> result = RestUtils.checkAuthorization(request, loginService, AUTHORITY);
 		if (result.getBody().getError() != 0) {
 			return result;
 		}
 
 		Response resp;
 		try {
-			//o.setUid(null);
-			resp = new Response(0, "Save success.", acrbatService.save(o));
+			// o.setUid(null);
+			resp = new Response(0, "Save success.", contyearService.save(o));
 			return new ResponseEntity<Response>(resp, HttpStatus.OK);
 		} catch (YesException e) {
 			// TODO: handle exception
@@ -72,21 +73,20 @@ public class AcrbatController {
 		}
 
 	}
-	
-	
+
 	/**
 	 * 通过UID删除实体
 	 * 
 	 * @author <a href="mailto:ardui@163.com">ardui</a>
 	 * @param uid
-	 * @return ResponseEntity<Response> 
-	 * @date Sat Jun 20 09:44:17 CST 2020	
+	 * @return ResponseEntity<Response>
+	 * @date Tue Jun 23 11:06:06 CST 2020
 	 */
 	@RequestMapping(value = "/{uids}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<Response> delet(@PathVariable String uids, HttpServletRequest request) {
 
-		ResponseEntity<Response> result = RestUtils.checkAuthorization(request, loginService,AUTHORITY);
+		ResponseEntity<Response> result = RestUtils.checkAuthorization(request, loginService, AUTHORITY);
 		if (result.getBody().getError() != 0) {
 			return result;
 		}
@@ -94,7 +94,7 @@ public class AcrbatController {
 		Response resp;
 		try {
 
-			acrbatService.deletes(uids);
+			contyearService.deletes(uids);
 			resp = new Response(0, "Delete success.", null);
 			return new ResponseEntity<Response>(resp, HttpStatus.OK);
 		} catch (YesException e) {
@@ -103,29 +103,27 @@ public class AcrbatController {
 			return new ResponseEntity<Response>(resp, e.getErrorcode());
 		}
 	}
-	
-		
-	
+
 	/**
 	 * 通过UID删除实体
 	 * 
 	 * @author <a href="mailto:ardui@163.com">ardui</a>
 	 * @param uid
-	 * @return ResponseEntity<Response> 
-	 * @date Sat Jun 20 09:44:17 CST 2020	
+	 * @return ResponseEntity<Response>
+	 * @date Tue Jun 23 11:06:06 CST 2020
 	 */
 	@RequestMapping(value = "/{uid}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<Response> get(@PathVariable String uid, HttpServletRequest request) {
 
-		ResponseEntity<Response> result = RestUtils.checkAuthorization(request, loginService,AUTHORITY);
+		ResponseEntity<Response> result = RestUtils.checkAuthorization(request, loginService, AUTHORITY);
 		if (result.getBody().getError() != 0) {
 			return result;
 		}
 
 		Response resp;
 
-		Acrbat o = acrbatService.getByUid(uid);
+		Contyearv o = contyearService.getByUid(uid);
 		if (o == null) {
 			resp = new Response(HttpStatus.NOT_FOUND.value(), "Object not found", null);
 			return new ResponseEntity<Response>(resp, HttpStatus.NOT_FOUND);
@@ -135,23 +133,21 @@ public class AcrbatController {
 		}
 	}
 
-        /**
+	/**
 	 * 通过条件查询实体
 	 * 
 	 * @author <a href="mailto:ardui@163.com">ardui</a>
-	 * @param Acrbat, pageable
+	 * @param Contbah,
+	 *            pageable
 	 * @return HttpResult
-	 * @date Sat Jun 20 09:44:17 CST 2020	
+	 * @date Tue Jun 23 11:06:06 CST 2020
 	 */
 	@RequestMapping(value = "query", method = RequestMethod.POST)
-	public HttpResult query(@Valid @RequestBody(required = false) Acrbat acrbat, Pageable pageable) {
-		if (acrbat == null) {
-			acrbat = new Acrbat();
+	public HttpResult query(@Valid @RequestBody(required = false) Contyearv contyear, Pageable pageable) {
+		if (contyear == null) {
+			contyear = new Contyearv();
 		}
-		return new HttpResult(acrbatService.query(acrbat, pageable));
+		return new HttpResult(contyearService.query(contyear, pageable));
 	}
-	
-	
-
 
 }

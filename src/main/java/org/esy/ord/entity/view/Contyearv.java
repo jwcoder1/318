@@ -23,10 +23,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @EntityInfo("合约表头档")
-@Table(name = "Contbahv")
-@Subselect("select a.*,b.cus_alias,c.work_desc from cont_bah a left join cus_cus b on b.cus_nbr=a.cus_nbr left join sale_bat c on c.s_nbr=a.s_nbr")
+@Table(name = "Contyearv")
+@Subselect("select a.*,b.cus_alias, from cont_bah a left join cus_cus b on b.cus_nbr=a.cus_nbr")
 @Synchronize("cont_bah")
-public class Contbahv extends BaseProperties {
+public class Contyearv extends BaseProperties {
 
 	private static final long serialVersionUID = 1L;
 
@@ -88,14 +88,6 @@ public class Contbahv extends BaseProperties {
 	@FilterInfo(ListValue = "")
 	@Column(name = "s_nbr", length = 32)
 	private String s_nbr;
-
-	public String getWork_desc() {
-		return work_desc;
-	}
-
-	public void setWork_desc(String work_desc) {
-		this.work_desc = work_desc;
-	}
 
 	@FieldInfo("工作細項")
 	@FilterInfo(ListValue = "")
@@ -230,11 +222,6 @@ public class Contbahv extends BaseProperties {
 	@Column(name = "cus_alias", length = 64)
 	private String cus_alias;
 
-	@FieldInfo("工作內容")
-	@FilterInfo(ListValue = "match")
-	@Column(name = "work_desc", length = 64)
-	private String work_desc;
-	
 	@Transient
 	@JsonProperty("group_nbrb")
 	private String group_nbrb;// shift+alt+s
@@ -289,7 +276,7 @@ public class Contbahv extends BaseProperties {
 	 * 构造函数
 	 *
 	 */
-	public Contbahv() {
+	public Contyearv() {
 		super();
 	}
 	
@@ -330,7 +317,7 @@ public class Contbahv extends BaseProperties {
 	 * @param s_nbr
 	 *            工作代號
 	 * 
-	 * @param work_desc1
+	 * @param work_desc
 	 *            工作細項
 	 * 
 	 * @param tot_amt
@@ -403,8 +390,8 @@ public class Contbahv extends BaseProperties {
 	 *            結案人員姓名
 	 * 
 	 */
-	public Contbahv(String nbr, String con_nbr, String cus_nbr, Date date, Date plan_date, String group_nbr,
-			String cont_year, String year_status, Double amt, String items_desc, String s_nbr, String work_desc1,
+	public Contyearv(String nbr, String con_nbr, String cus_nbr, Date date, Date plan_date, String group_nbr,
+			String cont_year, String year_status, Double amt, String items_desc, String s_nbr, String work_desc,
 			Double tot_amt, String emp_nbr, String status, String statuts1, Date inv_date, String proj_nbr,
 			String inv_user, String inv_name, String edit_user1, String edit_user2, String edit_name1,
 			String edit_name2, Date edit_date, String file_nbr, Date over_date, String appo_letter, String proj_status,
@@ -616,7 +603,7 @@ public class Contbahv extends BaseProperties {
 	/**
 	 * @return work_desc1 工作細項
 	 */
-	public String getwork_desc1() {
+	public String getWork_desc1() {
 		return work_desc1;
 	}
 
@@ -624,8 +611,8 @@ public class Contbahv extends BaseProperties {
 	 * @param work_desc1
 	 *            工作細項
 	 */
-	public void setwork_desc1(String work_desc1) {
-		this.work_desc1 = work_desc1;
+	public void setWork_desc1(String Work_desc1) {
+		this.work_desc1 = Work_desc1;
 	}
 
 	/**

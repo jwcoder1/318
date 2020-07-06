@@ -71,7 +71,7 @@ public class Contbah extends BaseProperties {
 	@FieldInfo("年度型合約")
 	@FilterInfo(ListValue = "")
 	@Column(name = "year_status")
-	private boolean year_status;
+	private String year_status;
 
 	@FieldInfo("公費金額")
 	@FilterInfo(ListValue = "")
@@ -90,8 +90,8 @@ public class Contbah extends BaseProperties {
 
 	@FieldInfo("工作細項")
 	@FilterInfo(ListValue = "")
-	@Column(name = "work_desc", length = 32)
-	private String work_desc;
+	@Column(name = "work_desc1", length = 256)
+	private String work_desc1;
 
 	@FieldInfo("請款金額")
 	@FilterInfo(ListValue = "")
@@ -182,7 +182,7 @@ public class Contbah extends BaseProperties {
 	@FieldInfo("核准否")
 	@FilterInfo(ListValue = "")
 	@Column(name = "proj_status")
-	private boolean proj_status;
+	private String proj_status;
 
 	@FieldInfo("核准人員")
 	@FilterInfo(ListValue = "")
@@ -204,7 +204,7 @@ public class Contbah extends BaseProperties {
 	@FieldInfo("結案否")
 	@FilterInfo(ListValue = "")
 	@Column(name = "close_flag")
-	private boolean close_flag;
+	private String close_flag;
 
 	@FieldInfo("結案人員")
 	@FilterInfo(ListValue = "")
@@ -333,11 +333,11 @@ public class Contbah extends BaseProperties {
 	 * 
 	 */
 	public Contbah(String nbr, String con_nbr, String cus_nbr, Date date, Date plan_date, String group_nbr,
-			String cont_year, boolean year_status, Double amt, String items_desc, String s_nbr, String work_desc,
+			String cont_year, String year_status, Double amt, String items_desc, String s_nbr, String work_desc,
 			Double tot_amt, String emp_nbr, String status, String statuts1, Date inv_date, String proj_nbr,
 			String inv_user, String inv_name, String edit_user1, String edit_user2, String edit_name1,
-			String edit_name2, Date edit_date, String file_nbr, Date over_date, String appo_letter, boolean proj_status,
-			String status_user, String status_name, Date close_date, boolean close_flag, String close_user,
+			String edit_name2, Date edit_date, String file_nbr, Date over_date, String appo_letter, String proj_status,
+			String status_user, String status_name, Date close_date, String close_flag, String close_user,
 			String close_name) {
 		super();
 		this.nbr = nbr;
@@ -351,7 +351,7 @@ public class Contbah extends BaseProperties {
 		this.amt = amt;
 		this.items_desc = items_desc;
 		this.s_nbr = s_nbr;
-		this.work_desc = work_desc;
+		this.work_desc1 = work_desc1;
 		this.tot_amt = tot_amt;
 		this.emp_nbr = emp_nbr;
 		this.status = status;
@@ -485,7 +485,7 @@ public class Contbah extends BaseProperties {
 	/**
 	 * @return year_status 年度型合約
 	 */
-	public boolean getYear_status() {
+	public String getYear_status() {
 		return year_status;
 	}
 
@@ -493,7 +493,7 @@ public class Contbah extends BaseProperties {
 	 * @param year_status
 	 *            年度型合約
 	 */
-	public void setYear_status(boolean Year_status) {
+	public void setYear_status(String Year_status) {
 		this.year_status = Year_status;
 	}
 
@@ -543,18 +543,18 @@ public class Contbah extends BaseProperties {
 	}
 
 	/**
-	 * @return work_desc 工作細項
+	 * @return work_desc1 工作細項
 	 */
-	public String getWork_desc() {
-		return work_desc;
+	public String getWork_desc1() {
+		return work_desc1;
 	}
 
 	/**
-	 * @param work_desc
+	 * @param work_desc1
 	 *            工作細項
 	 */
-	public void setWork_desc(String Work_desc) {
-		this.work_desc = Work_desc;
+	public void setWork_desc1(String Work_desc1) {
+		this.work_desc1 = Work_desc1;
 	}
 
 	/**
@@ -800,7 +800,7 @@ public class Contbah extends BaseProperties {
 	/**
 	 * @return proj_status 核准否
 	 */
-	public boolean getProj_status() {
+	public String getProj_status() {
 		return proj_status;
 	}
 
@@ -808,7 +808,7 @@ public class Contbah extends BaseProperties {
 	 * @param proj_status
 	 *            核准否
 	 */
-	public void setProj_status(boolean Proj_status) {
+	public void setProj_status(String Proj_status) {
 		this.proj_status = Proj_status;
 	}
 
@@ -860,7 +860,7 @@ public class Contbah extends BaseProperties {
 	/**
 	 * @return close_flag 結案否
 	 */
-	public boolean getClose_flag() {
+	public String getClose_flag() {
 		return close_flag;
 	}
 
@@ -868,7 +868,7 @@ public class Contbah extends BaseProperties {
 	 * @param close_flag
 	 *            結案否
 	 */
-	public void setClose_flag(boolean Close_flag) {
+	public void setClose_flag(String Close_flag) {
 		this.close_flag = Close_flag;
 	}
 

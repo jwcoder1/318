@@ -1,7 +1,7 @@
 package org.esy.ord.service;
 
 import org.esy.base.dao.core.PageResult;
-import org.esy.ord.entity.view.Contcasev;
+import org.esy.ord.entity.view.Contyearv;
 import org.springframework.data.domain.Pageable;
 
 /**
@@ -10,14 +10,14 @@ import org.springframework.data.domain.Pageable;
  *
  * @version v2.0
  */
-public interface IContcaseService {
+public interface IContyearService {
 
-	Contcasev save(Contcasev o);
-	Contcasev getByUid(String uid);
+	Contyearv save(Contyearv o);
+	Contyearv getByUid(String uid);
 
-	boolean delete(Contcasev o);
+	boolean delete(Contyearv o);
 
-	PageResult<Contcasev> query(Contcasev contcase, Pageable pageable);
+	PageResult<Contyearv> query(Contyearv contyear, Pageable pageable);
 	
 	void deletes(String uids);
 }

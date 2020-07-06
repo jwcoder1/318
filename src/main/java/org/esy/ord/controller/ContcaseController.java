@@ -8,7 +8,6 @@ import org.esy.base.http.HttpResult;
 import org.esy.base.service.ILoginService;
 import org.esy.base.util.RestUtils;
 import org.esy.base.util.YesException;
-import org.esy.ord.entity.view.Contbahv;//**
 import org.esy.ord.entity.view.Contcasev;
 import org.esy.ord.service.IContcaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api/ord/contcase")
 public class ContcaseController {
 
-    public static final String AUTHORITY = "ord_project"; //與前端菜單編號一致
+    public static final String AUTHORITY = "ord_contcase"; //與前端菜單編號一致
 
 
 	@Autowired
@@ -46,7 +45,7 @@ public class ContcaseController {
 	 * 通过页面数据保存实体
 	 * 
 	 * @author <a href="mailto:ardui@163.com">ardui</a>
-	 * @param Contbahv
+	 * @param acrbatv
 	 *            o
 	 * @param BindingResult
 	 *            request
@@ -55,7 +54,7 @@ public class ContcaseController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<Response> save(@RequestBody Contbahv o, HttpServletRequest request) {
+	public ResponseEntity<Response> save(@RequestBody Contcasev o, HttpServletRequest request) {
 
 		ResponseEntity<Response> result = RestUtils.checkAuthorization(request, loginService, AUTHORITY);
 		if (result.getBody().getError() != 0) {
@@ -124,7 +123,7 @@ public class ContcaseController {
 
 		Response resp;
 
-		Contbahv o = contcaseService.getByUid(uid);
+		Contcasev o = contcaseService.getByUid(uid);
 		if (o == null) {
 			resp = new Response(HttpStatus.NOT_FOUND.value(), "Object not found", null);
 			return new ResponseEntity<Response>(resp, HttpStatus.NOT_FOUND);
@@ -144,11 +143,11 @@ public class ContcaseController {
 	 * @date Tue Jun 23 11:06:06 CST 2020
 	 */
 	@RequestMapping(value = "query", method = RequestMethod.POST)
-	public HttpResult query(@Valid @RequestBody(required = false) Contcasev contbah, Pageable pageable) {
-		if (contbah == null) {
-			contbah = new Contcasev();
+	public HttpResult query(@Valid @RequestBody(required = false) Contcasev contcase, Pageable pageable) {
+		if (contcase == null) {
+			contcase = new Contcasev();
 		}
-		return new HttpResult(contcaseService.query(contbah, pageable));
+		return new HttpResult(contcaseService.query(contcase, pageable));
 	}
 
 }
