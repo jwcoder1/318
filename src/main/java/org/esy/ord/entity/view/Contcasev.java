@@ -21,11 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @EntityInfo("專案表頭")
 @Table(name = "Contcasev")
-@Subselect("select a.*, b.cus_alias,c.s_name,d.s_name as s_name1,e.s_name as s_name2 from cont_bah a "
-		+ "left join cus_cus b on b.cus_nbr=a.cus_nbr "
-		+ "left join staff c on c.s_nbr=a.inv_user "  //關聯接案人員
-		+ "left join staff d on d.s_nbr=a.edit_user1 "//關聯處理人員1     **有關聯的都要加虛擬欄位
-		+ "left join staff e on e.s_nbr=a.edit_user2")//關聯處理人員2
+@Subselect("select a.*, b.cus_alias,c.s_name,d.s_name as s_name1,e.s_name as s_name2,f.group_name,g.work_desc from cont_bah a "
+		+ "left join cus_cus b on b.cus_nbr=a.cus_nbr "// 關聯客戶編號
+		+ "left join staff c on c.s_nbr=a.inv_user "// 關聯接案人員
+		+ "left join staff d on d.s_nbr=a.edit_user1 "// 關聯處理人員1 **有關聯的都要加虛擬欄
+		+ "left join staff e on e.s_nbr=a.edit_user2 "// 關聯處理人員2
+		+ "left join bas_group f on f.group_nbr=a.group_nbr " // 關聯組別"
+		+ "left join sale_bat g on g.s_nbr=a.items_desc") // 關聯工作項目
 @Synchronize("cont_bah")
 public class Contcasev extends BaseProperties {
 
@@ -42,19 +44,19 @@ public class Contcasev extends BaseProperties {
 	private String con_nbr;
 
 	@FieldInfo("客戶編號")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="cus_nbr,cus_nbrb") 
+	@FilterInfo(ListValue = "gte,lte", FieldsValue = "cus_nbr,cus_nbrb")
 	@Column(name = "cus_nbr", length = 32)
 	private String cus_nbr;
 
 	@FieldInfo("合約日期")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="date,dateb") 
+	@FilterInfo(ListValue = "gte,lte", FieldsValue = "date,dateb")
 	@Column(name = "date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date date;
-	
+
 	@FieldInfo("預計完成日期")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="plan_date,plan_dateb") 
+	@FilterInfo(ListValue = "gte,lte", FieldsValue = "plan_date,plan_dateb")
 	@Column(name = "plan_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -92,8 +94,8 @@ public class Contcasev extends BaseProperties {
 
 	@FieldInfo("工作細項")
 	@FilterInfo(ListValue = "")
-	@Column(name = "work_desc1", length = 32)
-	private String work_desc1;
+	@Column(name = "work_content", length = 256)
+	private String work_content;
 
 	@FieldInfo("請款金額")
 	@FilterInfo(ListValue = "")
@@ -218,105 +220,66 @@ public class Contcasev extends BaseProperties {
 	@Column(name = "close_name", length = 32)
 	private String close_name;
 
-//	@FieldInfo("是否為專案")  //虛擬欄位
-//	@FilterInfo(ListValue = "neq")
-//	@Column(name = "isproject", length = 64)
-//	private String isproject;
-//	
-//	public String getIsproject() {
-//		return isproject;
-//	}
-//
-//	public void setIsproject(String isproject) {
-//		this.isproject = isproject;
-	//}
+	@FieldInfo("是否為專案") // 虛擬欄位
+	@FilterInfo(ListValue = "")
+	@Transient
+	@Column(name = "isproject", length = 64)
+	private String isproject;
 
-	@FieldInfo("客戶名稱")
+	public String getIsproject() {
+		return isproject;
+	}
+
+	public void setIsproject(String Isproject) {
+		this.isproject = Isproject;
+	}
+
+	@FieldInfo("客戶名稱") // 虛擬欄位
 	@FilterInfo(ListValue = "match")
 	@Column(name = "cus_alias", length = 64)
 	private String cus_alias;
-	
-	@FieldInfo("員工名稱")   //虛擬欄位
+
+	@FieldInfo("員工名稱") // 虛擬欄位
 	@Column(name = "s_name", length = 64)
 	private String s_name;
-	
-	@FieldInfo("員工名稱1")//虛擬欄位
+
+	@FieldInfo("員工名稱1") // 虛擬欄位
 	@Column(name = "s_name1", length = 64)
 	private String s_name1;
-	
-	@FieldInfo("員工名稱2")//虛擬欄位
+
+	@FieldInfo("員工名稱2") // 虛擬欄位
 	@Column(name = "s_name2", length = 64)
 	private String s_name2;
-	
-	public String getS_name() {
-		return s_name;
-	}
 
-	public void setS_name(String s_name) {
-		this.s_name = s_name;
-	}
+	@FieldInfo("客戶名稱") // 虛擬欄位
+	@Column(name = "group_name", length = 64)
+	private String group_name;
 
-	public String getS_name1() {
-		return s_name1;
-	}
+	@FieldInfo("工作內容") // 虛擬欄位              
+	@Column(name = "work_desc", length = 64)
+	private String work_desc;
 
-	public void setS_name1(String s_name1) {
-		this.s_name1 = s_name1;
-	}
-
-	public String getS_name2() {
-		return s_name2;
-	}
-
-	public void setS_name2(String s_name2) {
-		this.s_name2 = s_name2;
-	}
-
-	@Transient
-	@JsonProperty("group_nbrb")
+	@Transient         //表頭的
+	@JsonProperty("group_nbrb") // 虛擬欄位
 	private String group_nbrb;// shift+alt+s
-	
-	@FieldInfo("合約日期") 
-	@Transient 
-	@JsonProperty("dateb") 
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+
+	@FieldInfo("合約日期")
+	@Transient
+	@JsonProperty("dateb") // 虛擬欄位
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date dateb;
-	
-	@FieldInfo("預計完成日期") 
-	@Transient 
-	@JsonProperty("plan_dateb") 
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+
+	@FieldInfo("預計完成日期")
+	@Transient
+	@JsonProperty("plan_dateb") // 虛擬欄位
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date plan_dateb;
-	
+
 	@Transient
-	@JsonProperty("cus_nbrb")
+	@JsonProperty("cus_nbrb") // 虛擬欄位
 	private String cus_nbrb;// shift+alt+s
-	
-	public Date getDateb() {
-		return dateb;
-	}
-
-	public void setDateb(Date dateb) {
-		this.dateb = dateb;
-	}
-
-	public Date getPlan_dateb() {
-		return plan_dateb;
-	}
-
-	public void setPlan_dateb(Date plan_dateb) {
-		this.plan_dateb = plan_dateb;
-	}
-
-	public String getCus_nbrb() {
-		return cus_nbrb;
-	}
-
-	public void setCus_nbrb(String cus_nbrb) {
-		this.cus_nbrb = cus_nbrb;
-	}
 
 	/**
 	 *
@@ -326,7 +289,7 @@ public class Contcasev extends BaseProperties {
 	public Contcasev() {
 		super();
 	}
-	
+
 	/**
 	 *
 	 * 构造函数
@@ -364,7 +327,7 @@ public class Contcasev extends BaseProperties {
 	 * @param s_nbr
 	 *            工作代號
 	 * 
-	 * @param work_desc
+	 * @param work_content
 	 *            工作細項
 	 * 
 	 * @param tot_amt
@@ -438,7 +401,7 @@ public class Contcasev extends BaseProperties {
 	 * 
 	 */
 	public Contcasev(String nbr, String con_nbr, String cus_nbr, Date date, Date plan_date, String group_nbr,
-			String cont_year, String year_status, Double amt, String items_desc, String s_nbr, String work_desc,
+			String cont_year, String year_status, Double amt, String items_desc, String s_nbr, String work_content,
 			Double tot_amt, String emp_nbr, String status, String statuts1, Date inv_date, String proj_nbr,
 			String inv_user, String inv_name, String edit_user1, String edit_user2, String edit_name1,
 			String edit_name2, Date edit_date, String file_nbr, Date over_date, String appo_letter, String proj_status,
@@ -456,7 +419,7 @@ public class Contcasev extends BaseProperties {
 		this.amt = amt;
 		this.items_desc = items_desc;
 		this.s_nbr = s_nbr;
-		this.work_desc1 = work_desc1;
+		this.work_content = work_content;
 		this.tot_amt = tot_amt;
 		this.emp_nbr = emp_nbr;
 		this.status = status;
@@ -648,18 +611,18 @@ public class Contcasev extends BaseProperties {
 	}
 
 	/**
-	 * @return work_desc1 工作細項
+	 * @return work_content 工作細項
 	 */
-	public String getWork_desc1() {
-		return work_desc1;
+	public String getWork_content() {
+		return work_content;
 	}
 
 	/**
-	 * @param work_desc1
+	 * @param work_content
 	 *            工作細項
 	 */
-	public void setWork_desc1(String Work_desc1) {
-		this.work_desc1 = Work_desc1;
+	public void setWork_content(String Work_content) {
+		this.work_content = Work_content;
 	}
 
 	/**
@@ -1007,6 +970,30 @@ public class Contcasev extends BaseProperties {
 		this.close_name = Close_name;
 	}
 
+	public Date getDateb() {
+		return dateb;
+	}
+
+	public void setDateb(Date dateb) {
+		this.dateb = dateb;
+	}
+
+	public Date getPlan_dateb() {
+		return plan_dateb;
+	}
+
+	public void setPlan_dateb(Date plan_dateb) {
+		this.plan_dateb = plan_dateb;
+	}
+
+	public String getCus_nbrb() {
+		return cus_nbrb;
+	}
+
+	public void setCus_nbrb(String cus_nbrb) {
+		this.cus_nbrb = cus_nbrb;
+	}
+
 	public String getCus_alias() {
 		return cus_alias;
 	}
@@ -1022,6 +1009,45 @@ public class Contcasev extends BaseProperties {
 	public void setGroup_nbrb(String group_nbrb) {
 		this.group_nbrb = group_nbrb;
 	}
-	
-	
+
+	public String getS_name() {
+		return s_name;
+	}
+
+	public void setS_name(String s_name) {
+		this.s_name = s_name;
+	}
+
+	public String getS_name1() {
+		return s_name1;
+	}
+
+	public void setS_name1(String s_name1) {
+		this.s_name1 = s_name1;
+	}
+
+	public String getS_name2() {
+		return s_name2;
+	}
+
+	public void setS_name2(String s_name2) {
+		this.s_name2 = s_name2;
+	}
+
+	public String getGroup_name() {
+		return group_name;
+	}
+
+	public void setGroup_name(String group_name) {
+		this.group_name = group_name;
+	}
+
+	public String getWork_desc() {
+		return work_desc;
+	}
+
+	public void setWork_desc(String work_desc) {
+		this.work_desc = work_desc;
+	}
+
 }

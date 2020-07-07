@@ -22,9 +22,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@EntityInfo("合约表头档")
+@EntityInfo("合約年度")
 @Table(name = "Contyearv")
-@Subselect("select a.*,b.cus_alias, from cont_bah a left join cus_cus b on b.cus_nbr=a.cus_nbr")
+@Subselect("select a.*, b.cus_alias, c.work_desc from cont_bah a left join cus_cus b on b.cus_nbr=a.cus_nbr left join sale_bat c on c.s_nbr=a.s_nbr")
 @Synchronize("cont_bah")
 public class Contyearv extends BaseProperties {
 
@@ -41,19 +41,19 @@ public class Contyearv extends BaseProperties {
 	private String con_nbr;
 
 	@FieldInfo("客戶編號")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="cus_nbr,cus_nbrb") 
+	@FilterInfo(ListValue = "gte,lte", FieldsValue = "cus_nbr,cus_nbrb")
 	@Column(name = "cus_nbr", length = 32)
 	private String cus_nbr;
 
 	@FieldInfo("合約日期")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="date,dateb") 
+	@FilterInfo(ListValue = "gte,lte", FieldsValue = "date,dateb")
 	@Column(name = "date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date date;
-	
+
 	@FieldInfo("預計完成日期")
-	@FilterInfo(ListValue="gte,lte",FieldsValue="plan_date,plan_dateb") 
+	@FilterInfo(ListValue = "gte,lte", FieldsValue = "plan_date,plan_dateb")
 	@Column(name = "plan_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -91,8 +91,8 @@ public class Contyearv extends BaseProperties {
 
 	@FieldInfo("工作細項")
 	@FilterInfo(ListValue = "")
-	@Column(name = "work_desc1", length = 32)
-	private String work_desc1;
+	@Column(name = "work_content", length = 32)
+	private String work_content;
 
 	@FieldInfo("請款金額")
 	@FilterInfo(ListValue = "")
@@ -217,33 +217,44 @@ public class Contyearv extends BaseProperties {
 	@Column(name = "close_name", length = 32)
 	private String close_name;
 
-	@FieldInfo("客戶名稱")
-	@FilterInfo(ListValue = "match")
+	@FieldInfo("客戶名稱") // 虛擬欄位
 	@Column(name = "cus_alias", length = 64)
 	private String cus_alias;
 
+	@FieldInfo("工作內容") // 虛擬欄位
+	@Column(name = "work_desc", length = 64)
+	private String work_desc;
+
 	@Transient
-	@JsonProperty("group_nbrb")
+	@JsonProperty("group_nbrb") // 虛擬欄位
 	private String group_nbrb;// shift+alt+s
-	
-	@FieldInfo("合約日期") 
-	@Transient 
-	@JsonProperty("dateb") 
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+
+	@FieldInfo("合約日期")
+	@Transient
+	@JsonProperty("dateb") // 虛擬欄位
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date dateb;
-	
-	@FieldInfo("預計完成日期") 
-	@Transient 
-	@JsonProperty("plan_dateb") 
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+
+	@FieldInfo("預計完成日期")
+	@Transient
+	@JsonProperty("plan_dateb") // 虛擬欄位
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date plan_dateb;
-	
+
 	@Transient
-	@JsonProperty("cus_nbrb")
+	@JsonProperty("cus_nbrb") // 虛擬欄位
 	private String cus_nbrb;// shift+alt+s
-	
+
+	public String getWork_desc() {
+		return work_desc;
+	}
+
+	public void setWork_desc(String work_desc) {
+		this.work_desc = work_desc;
+	}
+
 	public Date getDateb() {
 		return dateb;
 	}
@@ -269,8 +280,9 @@ public class Contyearv extends BaseProperties {
 	}
 
 	@Transient
-	@JsonProperty("contacrs")
+	@JsonProperty("contacrs") // 宿主
 	private List<Contacr> contacrs = new ArrayList<Contacr>();
+
 	/**
 	 *
 	 * 构造函数
@@ -279,119 +291,84 @@ public class Contyearv extends BaseProperties {
 	public Contyearv() {
 		super();
 	}
-	
+
 	/**
 	 *
 	 * 构造函数
 	 *
-	 * @param nbr
-	 *            合約編號
+	 * @param nbr          合約編號
 	 * 
-	 * @param con_nbr
-	 *            案件編號
+	 * @param con_nbr      案件編號
 	 * 
-	 * @param cus_nbr
-	 *            客戶編號
+	 * @param cus_nbr      客戶編號
 	 * 
-	 * @param date
-	 *            日期
+	 * @param date         日期
 	 * 
-	 * @param plan_date
-	 *            預計完成日期
+	 * @param plan_date    預計完成日期
 	 * 
-	 * @param group_nbr
-	 *            組別
+	 * @param group_nbr    組別
 	 * 
-	 * @param cont_year
-	 *            合約年度
+	 * @param cont_year    合約年度
 	 * 
-	 * @param year_status
-	 *            年度型合約
+	 * @param year_status  年度型合約
 	 * 
-	 * @param amt
-	 *            公費金額
+	 * @param amt          公費金額
 	 * 
-	 * @param items_desc
-	 *            合約描述
+	 * @param items_desc   合約描述
 	 * 
-	 * @param s_nbr
-	 *            工作代號
+	 * @param s_nbr        工作代號
 	 * 
-	 * @param work_desc
-	 *            工作細項
+	 * @param work_content 工作細項
 	 * 
-	 * @param tot_amt
-	 *            請款金額
+	 * @param tot_amt      請款金額
 	 * 
-	 * @param emp_nbr
-	 *            承辦人
+	 * @param emp_nbr      承辦人
 	 * 
-	 * @param status
-	 *            狀態
+	 * @param status       狀態
 	 * 
-	 * @param statuts1
-	 *            狀態1
+	 * @param statuts1     狀態1
 	 * 
-	 * @param inv_date
-	 *            委任日期
+	 * @param inv_date     委任日期
 	 * 
-	 * @param proj_nbr
-	 *            專案編號
+	 * @param proj_nbr     專案編號
 	 * 
-	 * @param inv_user
-	 *            接案人員
+	 * @param inv_user     接案人員
 	 * 
-	 * @param inv_name
-	 *            接案人員姓名
+	 * @param inv_name     接案人員姓名
 	 * 
-	 * @param edit_user1
-	 *            處理人員1
+	 * @param edit_user1   處理人員1
 	 * 
-	 * @param edit_user2
-	 *            處理人員2
+	 * @param edit_user2   處理人員2
 	 * 
-	 * @param edit_name1
-	 *            處理人員姓名1
+	 * @param edit_name1   處理人員姓名1
 	 * 
-	 * @param edit_name2
-	 *            處理人員姓名2
+	 * @param edit_name2   處理人員姓名2
 	 * 
-	 * @param edit_date
-	 *            異動日期
+	 * @param edit_date    異動日期
 	 * 
-	 * @param file_nbr
-	 *            檔案編號
+	 * @param file_nbr     檔案編號
 	 * 
-	 * @param over_date
-	 *            完成日期
+	 * @param over_date    完成日期
 	 * 
-	 * @param appo_letter
-	 *            委任書上傳
+	 * @param appo_letter  委任書上傳
 	 * 
-	 * @param proj_status
-	 *            核准否
+	 * @param proj_status  核准否
 	 * 
-	 * @param status_user
-	 *            核准人員
+	 * @param status_user  核准人員
 	 * 
-	 * @param status_name
-	 *            核准人員姓名
+	 * @param status_name  核准人員姓名
 	 * 
-	 * @param close_date
-	 *            結案日期
+	 * @param close_date   結案日期
 	 * 
-	 * @param close_flag
-	 *            結案否
+	 * @param close_flag   結案否
 	 * 
-	 * @param close_user
-	 *            結案人員
+	 * @param close_user   結案人員
 	 * 
-	 * @param close_name
-	 *            結案人員姓名
+	 * @param close_name   結案人員姓名
 	 * 
 	 */
 	public Contyearv(String nbr, String con_nbr, String cus_nbr, Date date, Date plan_date, String group_nbr,
-			String cont_year, String year_status, Double amt, String items_desc, String s_nbr, String work_desc,
+			String cont_year, String year_status, Double amt, String items_desc, String s_nbr, String work_content,
 			Double tot_amt, String emp_nbr, String status, String statuts1, Date inv_date, String proj_nbr,
 			String inv_user, String inv_name, String edit_user1, String edit_user2, String edit_name1,
 			String edit_name2, Date edit_date, String file_nbr, Date over_date, String appo_letter, String proj_status,
@@ -409,7 +386,7 @@ public class Contyearv extends BaseProperties {
 		this.amt = amt;
 		this.items_desc = items_desc;
 		this.s_nbr = s_nbr;
-		this.work_desc1 = work_desc1;
+		this.work_content = work_content;
 		this.tot_amt = tot_amt;
 		this.emp_nbr = emp_nbr;
 		this.status = status;
@@ -443,8 +420,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param nbr
-	 *            合約編號
+	 * @param nbr 合約編號
 	 */
 	public void setNbr(String Nbr) {
 		this.nbr = Nbr;
@@ -458,8 +434,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param con_nbr
-	 *            案件編號
+	 * @param con_nbr 案件編號
 	 */
 	public void setCon_nbr(String Con_nbr) {
 		this.con_nbr = Con_nbr;
@@ -473,8 +448,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param cus_nbr
-	 *            客戶編號
+	 * @param cus_nbr 客戶編號
 	 */
 	public void setCus_nbr(String Cus_nbr) {
 		this.cus_nbr = Cus_nbr;
@@ -488,8 +462,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param date
-	 *            日期
+	 * @param date 日期
 	 */
 	public void setDate(Date Date) {
 		this.date = Date;
@@ -503,8 +476,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param plan_date
-	 *            預計完成日期
+	 * @param plan_date 預計完成日期
 	 */
 	public void setPlan_date(Date Plan_date) {
 		this.plan_date = Plan_date;
@@ -518,8 +490,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param group_nbr
-	 *            組別
+	 * @param group_nbr 組別
 	 */
 	public void setGroup_nbr(String Group_nbr) {
 		this.group_nbr = Group_nbr;
@@ -533,8 +504,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param cont_year
-	 *            合約年度
+	 * @param cont_year 合約年度
 	 */
 	public void setCont_year(String Cont_year) {
 		this.cont_year = Cont_year;
@@ -548,8 +518,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param year_status
-	 *            年度型合約
+	 * @param year_status 年度型合約
 	 */
 	public void setYear_status(String Year_status) {
 		this.year_status = Year_status;
@@ -563,8 +532,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param amt
-	 *            公費金額
+	 * @param amt 公費金額
 	 */
 	public void setAmt(Double Amt) {
 		this.amt = Amt;
@@ -578,8 +546,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param items_desc
-	 *            合約描述
+	 * @param items_desc 合約描述
 	 */
 	public void setItems_desc(String Items_desc) {
 		this.items_desc = Items_desc;
@@ -593,26 +560,24 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param s_nbr
-	 *            工作代號
+	 * @param s_nbr 工作代號
 	 */
 	public void setS_nbr(String S_nbr) {
 		this.s_nbr = S_nbr;
 	}
 
 	/**
-	 * @return work_desc1 工作細項
+	 * @return work_content 工作細項
 	 */
-	public String getWork_desc1() {
-		return work_desc1;
+	public String getwork_content() {
+		return work_content;
 	}
 
 	/**
-	 * @param work_desc1
-	 *            工作細項
+	 * @param work_content 工作細項
 	 */
-	public void setWork_desc1(String Work_desc1) {
-		this.work_desc1 = Work_desc1;
+	public void setwork_content(String work_content) {
+		this.work_content = work_content;
 	}
 
 	/**
@@ -623,8 +588,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param tot_amt
-	 *            請款金額
+	 * @param tot_amt 請款金額
 	 */
 	public void setTot_amt(Double Tot_amt) {
 		this.tot_amt = Tot_amt;
@@ -638,8 +602,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param emp_nbr
-	 *            承辦人
+	 * @param emp_nbr 承辦人
 	 */
 	public void setEmp_nbr(String Emp_nbr) {
 		this.emp_nbr = Emp_nbr;
@@ -653,8 +616,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param status
-	 *            狀態
+	 * @param status 狀態
 	 */
 	public void setStatus(String Status) {
 		this.status = Status;
@@ -668,8 +630,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param statuts1
-	 *            狀態1
+	 * @param statuts1 狀態1
 	 */
 	public void setStatuts1(String Statuts1) {
 		this.statuts1 = Statuts1;
@@ -683,8 +644,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param inv_date
-	 *            委任日期
+	 * @param inv_date 委任日期
 	 */
 	public void setInv_date(Date Inv_date) {
 		this.inv_date = Inv_date;
@@ -698,8 +658,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param proj_nbr
-	 *            專案編號
+	 * @param proj_nbr 專案編號
 	 */
 	public void setProj_nbr(String Proj_nbr) {
 		this.proj_nbr = Proj_nbr;
@@ -713,8 +672,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param inv_user
-	 *            接案人員
+	 * @param inv_user 接案人員
 	 */
 	public void setInv_user(String Inv_user) {
 		this.inv_user = Inv_user;
@@ -728,8 +686,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param inv_name
-	 *            接案人員姓名
+	 * @param inv_name 接案人員姓名
 	 */
 	public void setInv_name(String Inv_name) {
 		this.inv_name = Inv_name;
@@ -743,8 +700,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param edit_user1
-	 *            處理人員1
+	 * @param edit_user1 處理人員1
 	 */
 	public void setEdit_user1(String Edit_user1) {
 		this.edit_user1 = Edit_user1;
@@ -758,8 +714,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param edit_user2
-	 *            處理人員2
+	 * @param edit_user2 處理人員2
 	 */
 	public void setEdit_user2(String Edit_user2) {
 		this.edit_user2 = Edit_user2;
@@ -773,8 +728,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param edit_name1
-	 *            處理人員姓名1
+	 * @param edit_name1 處理人員姓名1
 	 */
 	public void setEdit_name1(String Edit_name1) {
 		this.edit_name1 = Edit_name1;
@@ -788,8 +742,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param edit_name2
-	 *            處理人員姓名2
+	 * @param edit_name2 處理人員姓名2
 	 */
 	public void setEdit_name2(String Edit_name2) {
 		this.edit_name2 = Edit_name2;
@@ -803,8 +756,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param edit_date
-	 *            異動日期
+	 * @param edit_date 異動日期
 	 */
 	public void setEdit_date(Date Edit_date) {
 		this.edit_date = Edit_date;
@@ -818,8 +770,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param file_nbr
-	 *            檔案編號
+	 * @param file_nbr 檔案編號
 	 */
 	public void setFile_nbr(String File_nbr) {
 		this.file_nbr = File_nbr;
@@ -833,8 +784,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param over_date
-	 *            完成日期
+	 * @param over_date 完成日期
 	 */
 	public void setOver_date(Date Over_date) {
 		this.over_date = Over_date;
@@ -848,8 +798,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param appo_letter
-	 *            委任書上傳
+	 * @param appo_letter 委任書上傳
 	 */
 	public void setAppo_letter(String Appo_letter) {
 		this.appo_letter = Appo_letter;
@@ -863,8 +812,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param proj_status
-	 *            核准否
+	 * @param proj_status 核准否
 	 */
 	public void setProj_status(String Proj_status) {
 		this.proj_status = Proj_status;
@@ -878,8 +826,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param status_user
-	 *            核准人員
+	 * @param status_user 核准人員
 	 */
 	public void setStatus_user(String Status_user) {
 		this.status_user = Status_user;
@@ -893,8 +840,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param status_name
-	 *            核准人員姓名
+	 * @param status_name 核准人員姓名
 	 */
 	public void setStatus_name(String Status_name) {
 		this.status_name = Status_name;
@@ -908,8 +854,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param close_date
-	 *            結案日期
+	 * @param close_date 結案日期
 	 */
 	public void setClose_date(Date Close_date) {
 		this.close_date = Close_date;
@@ -923,8 +868,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param close_flag
-	 *            結案否
+	 * @param close_flag 結案否
 	 */
 	public void setClose_flag(String Close_flag) {
 		this.close_flag = Close_flag;
@@ -938,8 +882,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param close_user
-	 *            結案人員
+	 * @param close_user 結案人員
 	 */
 	public void setClose_user(String Close_user) {
 		this.close_user = Close_user;
@@ -953,8 +896,7 @@ public class Contyearv extends BaseProperties {
 	}
 
 	/**
-	 * @param close_name
-	 *            結案人員姓名
+	 * @param close_name 結案人員姓名
 	 */
 	public void setClose_name(String Close_name) {
 		this.close_name = Close_name;
@@ -975,7 +917,7 @@ public class Contyearv extends BaseProperties {
 	public void setGroup_nbrb(String group_nbrb) {
 		this.group_nbrb = group_nbrb;
 	}
-	
+
 	public List<Contacr> getContacrs() {
 		return contacrs;
 	}

@@ -1,0 +1,27 @@
+package org.esy.ord.service.impl;
+
+import org.esy.base.dao.YSDao;
+import org.esy.base.dao.core.PageResult; //**
+import org.esy.ord.entity.view.Contyearv;
+import org.esy.ord.service.IContyearService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ContyearServiceImpl implements IContyearService {
+
+	@Autowired
+	private YSDao dao;
+
+
+	
+	@Override
+	public PageResult<Contyearv> query(Contyearv contyearv, Pageable pageable) {
+		return (PageResult<Contyearv>) dao.query(Contyearv.class, contyearv, pageable);
+	}
+
+
+
+
+}

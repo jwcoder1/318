@@ -1,5 +1,6 @@
 package org.esy.ord.service.impl;
 
+import java.text.SimpleDateFormat;
 //import java.text.SimpleDateFormat;//引入
 import java.util.HashMap;
 import java.util.Map;
@@ -21,8 +22,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ibm.icu.text.SimpleDateFormat;
-
 @Service
 public class ContcaseServiceImpl implements IContcaseService {
 
@@ -31,9 +30,9 @@ public class ContcaseServiceImpl implements IContcaseService {
 
 	@Autowired
 	private ISerialService serialService;
-	
+
 	@Autowired
-	private IAttachmentService attachmentService;  //上傳文件加寫
+	private IAttachmentService attachmentService; // 上傳文件加寫
 
 	/**
 	 * 保存实体
@@ -55,51 +54,51 @@ public class ContcaseServiceImpl implements IContcaseService {
 				throw new YesException(HttpStatus.INTERNAL_SERVER_ERROR, "该记录已被其他用户修改，不可更新!!！");
 			}
 		}
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM");
-			String date = "S" + YESUtil.getDateString(o.getDate(), formatter);    //自動生成
-			String no = serialService.getSerialString("ord", "ordbah", date, 5, 99999);
-			
-			o.setProj_nbr(no);   //指向專案編號
-			
-		
-//		if (BaseUtil.isEmpty(o.getNbr())) {  //判斷欄位是否為空(o.get..()可變換，這邊用Nbr())
-//			throw new YesException(HttpStatus.NOT_FOUND, "合约编号不可为空!!!");
-//		}
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM");
+		String date = "S" + YESUtil.getDateString(o.getDate(), formatter); // 自動生成
+		String no = serialService.getSerialString("ord", "ordbah", date, 5, 99999);
+
+		o.setProj_nbr(no); // 指向專案編號
+
+		// if (BaseUtil.isEmpty(o.getNbr())) { //判斷欄位是否為空(o.get..()可變換，這邊用Nbr())
+		// throw new YesException(HttpStatus.NOT_FOUND, "合约编号不可为空!!!");
+		// }
 
 		Map<String, Object> q = new HashMap<String, Object>();
-		q.put("attachmentId", o.getAppo_letter());                    //這三行為上傳文件加寫
+		q.put("attachmentId", o.getAppo_letter()); // 這三行為上傳文件加寫
 		attachmentService.updateBinds(q);
 
-//		List<Contacr> contacrs = o.getContacrs();
-//		if (BaseUtil.isNotEmpty(o.getUid())) {
-//			Contacr f = new Contacr();
-//			f.setHuid(o.getUid());
-//			dao.deleteList(Contacr.class, f);
-//		}
-//        74~88行為存檔的其一方式，利用UID
-//		o = dao.save(Contbah.class, o);
-//		for (Contacr contacr : contacrs) {
-//			contacr.setUid(o.getUid());
-//			contacr.setNbr(o.getNbr());
-//			dao.save(Contbah.class, contacr);
-//		}
-//
-//		return o;
-		
+		// List<Contacr> contacrs = o.getContacrs();
+		// if (BaseUtil.isNotEmpty(o.getUid())) {
+		// Contacr f = new Contacr();
+		// f.setHuid(o.getUid());
+		// dao.deleteList(Contacr.class, f);
+		// }
+		// 74~88行為存檔的其一方式，利用UID
+		// o = dao.save(Contbah.class, o);
+		// for (Contacr contacr : contacrs) {
+		// contacr.setUid(o.getUid());
+		// contacr.setNbr(o.getNbr());
+		// dao.save(Contbah.class, contacr);
+		// }
+		//
+		// return o;
+
 		o = dao.save(Contbah.class, o);
-//		for (Contacr contacr : contacrs) {  //存檔:一筆一筆迴圈
-//			
-//			if (contacr.getIsdel() && BaseUtil.isNotEmpty(contacr.getUid())) {//BaseUtil.isNotEmpty(contacr.getUid())判斷不為空時(修改時)
-//				dao.delete(Contacr.class, contacr);
-//			}
-//			if (!contacr.getIsdel()) {
-//				contacr.setHuid(o.getUid());
-//				contacr.setNbr(o.getNbr());
-//				dao.save(Contacr.class, contacr);
-//			}
-//		}
-		return o;    //90~103行為利用HUID做法
-		
+		// for (Contacr contacr : contacrs) { //存檔:一筆一筆迴圈
+		//
+		// if (contacr.getIsdel() && BaseUtil.isNotEmpty(contacr.getUid()))
+		// {//BaseUtil.isNotEmpty(contacr.getUid())判斷不為空時(修改時)
+		// dao.delete(Contacr.class, contacr);
+		// }
+		// if (!contacr.getIsdel()) {
+		// contacr.setHuid(o.getUid());
+		// contacr.setNbr(o.getNbr());
+		// dao.save(Contacr.class, contacr);
+		// }
+		// }
+		return o; // 90~103行為利用HUID做法
+
 	}
 
 	/**
@@ -145,7 +144,13 @@ public class ContcaseServiceImpl implements IContcaseService {
 	 */
 	@Override
 	public PageResult<Contcasev> query(Contcasev contcase, Pageable pageable) {
-		return (PageResult<Contcasev>) dao.query(Contcasev.class, contcase, pageable);
+		String where = "";      //條件為未列專案時
+		String aa=contcase.getIsproject();
+		System.out.print(aa);
+		if ("2".equals(contcase.getIsproject())) {
+			where = "wehre a.proj_nbr is not null and a.proj_nbr<>'' ";    //下條件:當專案編號不為空且不是null的同時(表示已列專案編號)
+		}
+		return (PageResult<Contcasev>) dao.query(Contcasev.class, contcase, pageable, "select a.* from cont_bah", where, "");
 	}
 
 	@Override
@@ -165,6 +170,5 @@ public class ContcaseServiceImpl implements IContcaseService {
 		}
 
 	}
-
 
 }
