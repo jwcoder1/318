@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @EntityInfo("專案表頭")
 @Table(name = "Contcasev")
-@Subselect("select a.*, b.cus_alias,c.s_name,d.s_name as s_name1,e.s_name as s_name2,f.group_name,g.work_desc from cont_bah a "
+@Subselect("select a.*, b.cus_alias, c.s_name,d.s_name as s_name1, e.s_name as s_name2, f.group_name,g.work_desc from cont_bah a "
 		+ "left join cus_cus b on b.cus_nbr=a.cus_nbr "// 關聯客戶編號
 		+ "left join staff c on c.s_nbr=a.inv_user "// 關聯接案人員
 		+ "left join staff d on d.s_nbr=a.edit_user1 "// 關聯處理人員1 **有關聯的都要加虛擬欄

@@ -1,9 +1,7 @@
 package org.esy.acr.controller;
 
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.esy.base.util.YesException;
 import org.esy.base.core.Response;
@@ -22,7 +19,6 @@ import org.esy.base.service.ILoginService;
 import org.esy.base.util.RestUtils;
 import org.esy.base.http.HttpResult;
 import org.esy.acr.service.IAprnbahService;
-import org.esy.acr.entity.Aprnbah;
 import org.esy.acr.entity.view.Aprnbahv;
 
 /**
@@ -35,35 +31,38 @@ import org.esy.acr.entity.view.Aprnbahv;
 @RequestMapping("/api/acr/aprnbah")
 public class AprnbahController {
 
-    public static final String AUTHORITY = "acr_aprnbah";
+    public static final String AUTHORITY = "acr_aprnbah"; //與前端菜單編號一致
+
 
 	@Autowired
 	private ILoginService loginService;
 
 	@Autowired
 	private IAprnbahService aprnbahService;
-		
+
 	/**
 	 * 通过页面数据保存实体
 	 * 
-	 * @author <a href="mailto:ardui@163.com">ardui</a> 
-	 * @param Aprnbahv  o
-	 * @param BindingResult request
+	 * @author <a href="mailto:ardui@163.com">ardui</a>
+	 * @param acrbatv
+	 *            o
+	 * @param BindingResult
+	 *            request
 	 * @return ResponseEntity<Response>
-	 * @date Fri Jun 19 16:27:16 CST 2020	
+	 * @date Tue Jun 23 11:06:06 CST 2020
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<Response> save(@RequestBody Aprnbahv o, HttpServletRequest request) {
 
-		ResponseEntity<Response> result = RestUtils.checkAuthorization(request, loginService,AUTHORITY);
+		ResponseEntity<Response> result = RestUtils.checkAuthorization(request, loginService, AUTHORITY);
 		if (result.getBody().getError() != 0) {
 			return result;
 		}
 
 		Response resp;
 		try {
-			//o.setUid(null);
+			// o.setUid(null);
 			resp = new Response(0, "Save success.", aprnbahService.save(o));
 			return new ResponseEntity<Response>(resp, HttpStatus.OK);
 		} catch (YesException e) {
@@ -73,16 +72,8 @@ public class AprnbahController {
 		}
 
 	}
+
 	
-	
-	/**
-	 * 通过UID删除实体
-	 * 
-	 * @author <a href="mailto:ardui@163.com">ardui</a>
-	 * @param uid
-	 * @return ResponseEntity<Response> 
-	 * @date Fri Jun 19 16:27:16 CST 2020	
-	 */
 	@RequestMapping(value = "/{uids}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<Response> delet(@PathVariable String uids, HttpServletRequest request) {
@@ -107,14 +98,7 @@ public class AprnbahController {
 	
 		
 	
-	/**
-	 * 通过UID删除实体
-	 * 
-	 * @author <a href="mailto:ardui@163.com">ardui</a>
-	 * @param uid
-	 * @return ResponseEntity<Response> 
-	 * @date Fri Jun 19 16:27:16 CST 2020	
-	 */
+	
 	@RequestMapping(value = "/{uid}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<Response> get(@PathVariable String uid, HttpServletRequest request) {
@@ -136,14 +120,8 @@ public class AprnbahController {
 		}
 	}
 
-        /**
-	 * 通过条件查询实体
-	 * 
-	 * @author <a href="mailto:ardui@163.com">ardui</a>
-	 * @param Aprnbah, pageable
-	 * @return HttpResult
-	 * @date Fri Jun 19 16:27:16 CST 2020	
-	 */
+      
+	
 	@RequestMapping(value = "query", method = RequestMethod.POST)
 	public HttpResult query(@Valid @RequestBody(required = false) Aprnbahv aprnbah, Pageable pageable) {
 		if (aprnbah == null) {

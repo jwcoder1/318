@@ -18,7 +18,7 @@ import org.esy.base.annotation.FilterInfo;
  *  实体类
  * 
  * @author <a href="mailto:ardui@163.com"ardui</a
- *  @date Fri Jun 19 16:27:16 CST 2020
+ *  @date Thu Jul 09 10:45:21 CST 2020
  */
 @Entity
 @Table(name = "aprn_bah" ,indexes = { @Index(name = "created", columnList = "created"), 

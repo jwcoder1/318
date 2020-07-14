@@ -34,7 +34,7 @@ import org.esy.acc.entity.Accbat;
 @RequestMapping("/api/acc/accbat")
 public class AccbatController {
 
-    public static final String AUTHORITY = "acc_accbat";
+    public static final String AUTHORITY = "acc_mapacc21";
 
 	@Autowired
 	private ILoginService loginService;
@@ -46,7 +46,7 @@ public class AccbatController {
 	 * 通过页面数据保存实体
 	 * 
 	 * @author <a href="mailto:ardui@163.com">ardui</a> 
-	 * @param Accbat  o
+	 * @param Accbatv  o
 	 * @param BindingResult request
 	 * @return ResponseEntity<Response>
 	 * @date Sat Jun 20 09:30:48 CST 2020	

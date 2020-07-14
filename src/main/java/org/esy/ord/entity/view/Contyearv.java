@@ -70,7 +70,7 @@ public class Contyearv extends BaseProperties {
 	private String cont_year;
 
 	@FieldInfo("年度型合約")
-	@FilterInfo(ListValue = "")
+	@FilterInfo(ListValue = "")//eq
 	@Column(name = "year_status")
 	private String year_status;
 

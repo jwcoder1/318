@@ -26,6 +26,9 @@ public class ContyearServiceImpl implements IContyearService {
 
 	@Override
 	public PageResult<Contyearv> query(Contyearv contyearv, Pageable pageable) {
+		
+//		String where = "where a.year_status is not null and a.year_status<>'' ";
+//		return (PageResult<Contyearv>) dao.query(Contyearv.class, contyearv, pageable, "select a.* ", where, "");
 		return (PageResult<Contyearv>) dao.query(Contyearv.class, contyearv, pageable);
 	}
 

@@ -1,15 +1,21 @@
-package org.esy.acc.entity;
+package org.esy.acc.entity.view;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import org.esy.base.annotation.EntityInfo;
 import org.esy.base.annotation.FieldInfo;
 import org.esy.base.core.BaseProperties;
+import org.hibernate.annotations.Subselect;
+import org.hibernate.annotations.Synchronize;
 import org.esy.base.annotation.FilterInfo;
 
 
@@ -21,10 +27,11 @@ import org.esy.base.annotation.FilterInfo;
  *  @date Sat Jun 20 09:30:48 CST 2020
  */
 @Entity
-@Table(name = "acc_bat" ,indexes = { @Index(name = "created", columnList = "created"), 
-@Index(name = "updated", columnList = "updated")})
-@EntityInfo("收款單轉傳票明細")
-public class Accbat extends BaseProperties {
+@EntityInfo("合約表頭")
+@Table(name = "Accbatv")
+@Subselect("select a.* from acc_bat a ")
+@Synchronize("acc_bat")
+public class Accbatv extends BaseProperties {
 
 	private static final long serialVersionUID = 1L;
 
@@ -44,7 +51,7 @@ public class Accbat extends BaseProperties {
 	private String year ;
 
 	@FieldInfo("會計科目")
-	@FilterInfo(ListValue = "")
+	@FilterInfo(ListValue="gte,lte",FieldsValue="acc_id,acc_idb") 
 	@Column(name = "acc_id", length =32  )
 	private String acc_id ;
 
@@ -69,7 +76,7 @@ public class Accbat extends BaseProperties {
 	private String dept_id ;
 
 	@FieldInfo("傳票日期")
-	@FilterInfo(ListValue = "eq")
+	@FilterInfo(ListValue="gte,lte",FieldsValue="date,dateb") 
 	@Column(name = "date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -120,12 +127,12 @@ public class Accbat extends BaseProperties {
 	@Column(name = "io_p", length =32  )
 	private String io_p ;
 
-	@FieldInfo("客戶代號/廠商代號")
-	@FilterInfo(ListValue = "")
+	@FieldInfo("客戶代號")
+	@FilterInfo(ListValue="gte,lte",FieldsValue="io_nbr,io_nbrb") 
 	@Column(name = "io_nbr", length =32  )
 	private String io_nbr ;
 
-	@FieldInfo("客戶名稱/廠商名稱")
+	@FieldInfo("客戶名稱")
 	@FilterInfo(ListValue = "")
 	@Column(name = "io_name", length =32  )
 	private String io_name ;
@@ -149,14 +156,54 @@ public class Accbat extends BaseProperties {
 	@FilterInfo(ListValue = "")
 	@Column(name = "chk_nbr", length =32  )
 	private String chk_nbr ;
+	
+	@Transient
+	@JsonProperty("acc_idb")//虛擬欄位
+	private String acc_idb;// shift+alt+s
+	
+	@Transient 
+	@JsonProperty("dateb") //虛擬欄位
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	private Date dateb;
+	
+	@Transient
+	@JsonProperty("io_nbrb")//虛擬欄位
+	private String io_nbrb;// shift+alt+s
 
+	
+	
+	
+     public String getAcc_idb() {
+		return acc_idb;
+	}
 
-     /**
+	public void setAcc_idb(String acc_idb) {
+		this.acc_idb = acc_idb;
+	}
+
+	public Date getDateb() {
+		return dateb;
+	}
+
+	public void setDateb(Date dateb) {
+		this.dateb = dateb;
+	}
+
+	public String getIo_nbrb() {
+		return io_nbrb;
+	}
+
+	public void setIo_nbrb(String io_nbrb) {
+		this.io_nbrb = io_nbrb;
+	}
+
+	/**
 	 *
 	 * 构造函数
 	 *
 	 */
-	public Accbat() {
+	public Accbatv() {
 		super();
 	}
 	
@@ -237,7 +284,7 @@ public class Accbat extends BaseProperties {
 	 *		  傳票編號
 	 * 
 	 	 */
-    	public Accbat( String nbr, String ioseq, String year, String acc_id, String acc_name, String mark_name, String c_or_d, String dept_id, Date date, String coin_nbr, Double coin_per, Double camt, Double amt, String s_dbf, String s_nbr, Double flshamt, Double rec_amt, String io_p, String io_nbr, String io_name, String status, String st_desc, boolean is_pz, String chk_nbr ) {
+    	public Accbatv( String nbr, String ioseq, String year, String acc_id, String acc_name, String mark_name, String c_or_d, String dept_id, Date date, String coin_nbr, Double coin_per, Double camt, Double amt, String s_dbf, String s_nbr, Double flshamt, Double rec_amt, String io_p, String io_nbr, String io_name, String status, String st_desc, boolean is_pz, String chk_nbr ) {
 		super();
 				this.nbr = nbr;
 				this.ioseq = ioseq;

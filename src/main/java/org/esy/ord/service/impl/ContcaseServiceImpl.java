@@ -68,36 +68,11 @@ public class ContcaseServiceImpl implements IContcaseService {
 		q.put("attachmentId", o.getAppo_letter()); // 這三行為上傳文件加寫
 		attachmentService.updateBinds(q);
 
-		// List<Contacr> contacrs = o.getContacrs();
-		// if (BaseUtil.isNotEmpty(o.getUid())) {
-		// Contacr f = new Contacr();
-		// f.setHuid(o.getUid());
-		// dao.deleteList(Contacr.class, f);
-		// }
-		// 74~88行為存檔的其一方式，利用UID
-		// o = dao.save(Contbah.class, o);
-		// for (Contacr contacr : contacrs) {
-		// contacr.setUid(o.getUid());
-		// contacr.setNbr(o.getNbr());
-		// dao.save(Contbah.class, contacr);
-		// }
-		//
-		// return o;
+		
 
 		o = dao.save(Contbah.class, o);
-		// for (Contacr contacr : contacrs) { //存檔:一筆一筆迴圈
-		//
-		// if (contacr.getIsdel() && BaseUtil.isNotEmpty(contacr.getUid()))
-		// {//BaseUtil.isNotEmpty(contacr.getUid())判斷不為空時(修改時)
-		// dao.delete(Contacr.class, contacr);
-		// }
-		// if (!contacr.getIsdel()) {
-		// contacr.setHuid(o.getUid());
-		// contacr.setNbr(o.getNbr());
-		// dao.save(Contacr.class, contacr);
-		// }
-		// }
-		return o; // 90~103行為利用HUID做法
+		
+		return o; 
 
 	}
 
@@ -145,8 +120,7 @@ public class ContcaseServiceImpl implements IContcaseService {
 	@Override
 	public PageResult<Contcasev> query(Contcasev contcase, Pageable pageable) {
 		String where = "";      //條件為未列專案時
-		String aa=contcase.getIsproject();
-		System.out.print(aa);
+
 		if ("2".equals(contcase.getIsproject())) {
 			where = "wehre a.proj_nbr is not null and a.proj_nbr<>'' ";    //下條件:當專案編號不為空且不是null的同時(表示已列專案編號)
 		}

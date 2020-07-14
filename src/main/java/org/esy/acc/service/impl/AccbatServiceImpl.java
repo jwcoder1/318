@@ -8,10 +8,13 @@ import org.esy.base.util.YESUtil;
 import org.esy.base.util.YesException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.esy.base.dao.core.PageResult;
+import org.esy.base.service.ISerialService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.ibm.icu.text.SimpleDateFormat;
 
 @Service
 public class AccbatServiceImpl implements IAccbatService {
@@ -19,9 +22,11 @@ public class AccbatServiceImpl implements IAccbatService {
 	@Autowired
 	private YSDao dao;
 	
+	@Autowired
+	private ISerialService serialService;
 	/**
 	 * 保存实体
-	 * @param Accbat
+	 * @param Accbatv
 	 * @return Accbat o
 	 * @version v2.0
 	 */
@@ -38,6 +43,13 @@ public class AccbatServiceImpl implements IAccbatService {
 				throw new YesException(HttpStatus.INTERNAL_SERVER_ERROR, "该记录已被其他用户修改，不可更新!!！");
 			}
 		}
+	    
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM");
+		String date = "S" + YESUtil.getDateString(o.getDate(), formatter); // 自動生成
+		String no = serialService.getSerialString("ord", "ordbah", date, 5, 99999);
+
+		o.setNbr(no); // 指向傳票號碼
+		
 		return dao.save(o);
 	}
 
@@ -55,7 +67,7 @@ public class AccbatServiceImpl implements IAccbatService {
 
 	/**
 	 * 删除实体
-	 * @param Accbat o
+	 * @param Accbatv o
 	 * @return boolean 
 	 * @ version v2.0 
 	 */

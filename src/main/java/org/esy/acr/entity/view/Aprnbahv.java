@@ -2,7 +2,6 @@ package org.esy.acr.entity.view;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -18,24 +17,17 @@ import org.esy.acr.entity.Aprnbat;
 import org.esy.base.annotation.EntityInfo;
 import org.esy.base.annotation.FieldInfo;
 import org.esy.base.core.BaseProperties;
-import org.esy.ord.entity.Contacr;
 import org.hibernate.annotations.Subselect;
 import org.hibernate.annotations.Synchronize;
 import org.esy.base.annotation.FilterInfo;
 
 
 
-/**
- *  实体类
- * 
- * @author <a href="mailto:ardui@163.com"ardui</a
- *  @date Fri Jun 19 16:27:16 CST 2020
- */
 @Entity
-@Table(name ="aprn_bahv")
 @EntityInfo("公費帳單")
+@Table(name ="Aprnbahv")
+@Subselect("select a.* from aprn_bah a ")
 @Synchronize("aprn_bah")
-@Subselect("select a.*,b.cus_alias from aprn_bah a left jion cus_cus b on b.cus_nbr=a.cus_nbr")
 public class Aprnbahv extends BaseProperties {
 
 	private static final long serialVersionUID = 1L;
@@ -46,7 +38,7 @@ public class Aprnbahv extends BaseProperties {
 	private String nbr ;
 
 	@FieldInfo("組別")
-	@FilterInfo(ListValue = "")
+	@FilterInfo(ListValue = "gte,lte", FieldsValue = "group_nbr,group_nbrb")
 	@Column(name = "group_nbr", length =32  )
 	private String group_nbr ;
 
@@ -56,12 +48,12 @@ public class Aprnbahv extends BaseProperties {
 	private String acr_mon ;
 
 	@FieldInfo("客戶編號")
-	@FilterInfo(ListValue = "")
+	@FilterInfo(ListValue="gte,lte",FieldsValue="cus_nbr,cus_nbrb") 
 	@Column(name = "cus_nbr", length =32  )
 	private String cus_nbr ;
 
 	@FieldInfo("列印日期")
-	@FilterInfo(ListValue = "")
+	@FilterInfo(ListValue="") 
 	@Column(name = "prn_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -82,11 +74,40 @@ public class Aprnbahv extends BaseProperties {
 	@Column(name = "status", length =32  )
 	private String status ;
 	
+	
+	@FieldInfo("帳單日期")
+	@FilterInfo(ListValue="gte,lte",FieldsValue="date,dateb") 
+	@Column(name = "date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	private Date date;
+	
+	
+	@FieldInfo("帳單日期") //虛擬欄位
+	@JsonProperty("dateb") 
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	private Date dateb;
+	
 	@FieldInfo("客戶名稱")  //虛擬欄位
 	@Column(name = "cus_alias", length = 64)
 	private String cus_alias;
-
 	
+	@Transient   //表頭的虛擬欄位要加
+	@JsonProperty("group_nbrb")//虛擬欄位
+	private String group_nbrb;// shift+alt+s
+	
+	
+	@Transient
+	@JsonProperty("cus_nbrb")//虛擬欄位
+	private String cus_nbrb;// shift+alt+s
+	
+	@FieldInfo("合約日期") 
+	@Transient 
+	@JsonProperty("prn_dateb") //虛擬欄位
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	private Date prn_dateb;
 	
 	@Transient
 	@JsonProperty("aprnbats") //宿主
@@ -279,5 +300,39 @@ public class Aprnbahv extends BaseProperties {
 	public void setCus_alias(String cus_alias) {
 		this.cus_alias = cus_alias;
 	}
+
+	public String getGroup_nbrb() {
+		return group_nbrb;
+	}
+
+	public void setGroup_nbrb(String group_nbrb) {
+		this.group_nbrb = group_nbrb;
+	}
+
+	public String getCus_nbrb() {
+		return cus_nbrb;
+	}
+
+	public void setCus_nbrb(String cus_nbrb) {
+		this.cus_nbrb = cus_nbrb;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Date getDateb() {
+		return dateb;
+	}
+
+	public void setDateb(Date dateb) {
+		this.dateb = dateb;
+	}
+
+
 	
 }
